@@ -21,7 +21,7 @@ public class Draw extends View {
         paint.setColor(Color.WHITE);
         paint.setAntiAlias(true);
     }
-   
+
     @Override
     protected void onDraw(Canvas canvas){
         //super.onDraw(canvas);
