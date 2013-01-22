@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="courses">
+        <item>"Волшебное письмо"</item>
+        <item>"Времена года"</item>
+        <item>"Веселая математика"</item>
+        <item>"Ориентирование"</item>
+    </string-array>
+    
+</resources>

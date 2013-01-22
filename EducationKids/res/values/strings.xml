@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Обучение детей</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="present">Представьтесь</string>
+    <string name="reference">Настройки</string>
+    <string name="admin">Администрирование</string>
+    <string name="login">Войти</string>
+    <string name="registration">Регистрация</string>
+    <string name="no_courses_found">Разделы не найдены!</string>
+    <string name="courses_name">Выберите раздел!</string>
+
+</resources>
