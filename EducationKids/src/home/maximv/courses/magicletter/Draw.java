@@ -44,36 +44,3 @@ public class Draw extends View {
     return true;
    }
 }
-
-/*private static final String TAG = "DrawView";
-public DrawView(Context context) {
-super(context);
-setFocusable(true);
-setFocusableInTouchMode(true);
-this.setOnTouchListener(this);
-paint.setColor(Color.WHITE);
-paint.setAntiAlias(true); }
-*/
-/*@Override
-public void onDraw(Canvas canvas) {
-for (Point point : points) {
-canvas.drawCircle(point.x, point.y, 45, paint);
-//Log.d(TAG, "Painting: "+point);
-}
-}*/
-/*public boolean onTouch(View view, MotionEvent event) {
-// if(event.getAction() != MotionEvent.ACTION_DOWN)
-//return super.onTouchEvent(event);
-Point point = new Point();
-point.x = event.getX();
-point.y = event.getY();
-points.add(point);
-invalidate();
-return true;
-}}class Point {
-float x, y;
-@Override
-public String toString() {
-return x + ", " + y;
-}*/
-
