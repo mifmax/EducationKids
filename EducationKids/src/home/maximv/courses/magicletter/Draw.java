@@ -39,7 +39,7 @@ public class Draw extends View {
        point.x = (int) event.getX();
        point.y = (int) event.getY();
        points.add(point); 
-      
+
        invalidate();
     return true;
    }
