@@ -22,7 +22,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnCreateContextMenuListener;
-public class Draw extends Activity{
+/*public class Draw extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,16 +48,16 @@ public class Draw extends Activity{
 		    return true;
 		}	
 		return true	;
-	}
+	}*/
 
 
-public class Draw2 extends View implements OnCreateContextMenuListener{
+public class Draw extends View implements OnCreateContextMenuListener{
 
     private Paint paint = new Paint();
     private ArrayList<Point> points = new ArrayList<Point>();
     private ArrayList<ArrayList<Point>> paths =new ArrayList<ArrayList<Point>>();
     private Context mContext;
-    public Draw2(Context context) {
+    public Draw(Context context) {
         super(context);
         setFocusable(true);
         setFocusableInTouchMode(true);
@@ -160,6 +160,6 @@ public void onCreateContextMenu(ContextMenu menu, View v,
 	selectColor();
 	
 }
-}
+//}
 
 }
