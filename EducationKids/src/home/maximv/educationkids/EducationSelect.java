@@ -7,6 +7,8 @@ import home.maximv.courses.magicletter.MagicLetter;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -52,4 +54,27 @@ public class EducationSelect extends ListActivity{
             startActivity(intent);
         }
     }
+ // идентификаторы для пунктов меню
+    private static final int IDM_OPEN = 101;
+    private static final int IDM_SAVE = 102;
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // добавляем пункты меню
+    	menu.add(Menu.NONE, IDM_OPEN, Menu.NONE, "Открыть");
+    	menu.add(Menu.NONE, IDM_SAVE, Menu.NONE, "Сохранить");
+    	return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+    	switch (item.getItemId()){
+    	case IDM_OPEN:
+    		//selectColor();
+    	    return true;
+    	case IDM_SAVE:
+    	    return true;
+    	}	
+    	return true	;
+    }
+
 }

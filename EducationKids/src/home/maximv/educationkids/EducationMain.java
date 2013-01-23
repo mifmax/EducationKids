@@ -1,5 +1,7 @@
 package home.maximv.educationkids;
 
+import home.maximv.voice.Voice;
+
 import java.util.List;
 
 import android.app.Activity;
@@ -13,11 +15,9 @@ import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import home.maximv.voice.Voice;
 public class EducationMain extends Activity {
     
     private SharedPreferences sPref;
@@ -31,7 +31,6 @@ public class EducationMain extends Activity {
         List<ResolveInfo> activities = pm.queryIntentActivities(
         new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
         if (activities.size() != 0) {
-            speakButton.setOnClickListener((OnClickListener) this);
             speakButton.setImageResource(R.drawable.mic_on);
         } else {
         speakButton.setEnabled(false);
