@@ -151,7 +151,6 @@ public void selectColor() {
 	    }
 	}).create();
 	dialog.show();
-	
 }
 
 @Override
