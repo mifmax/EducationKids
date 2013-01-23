@@ -1,18 +1,23 @@
 package home.maximv.educationkids;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.view.View.OnClickListener;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.ImageButton;
 import android.widget.Toast;
-
+import home.maximv.voice.Voice;
 public class EducationMain extends Activity {
     
     private SharedPreferences sPref;
@@ -21,7 +26,17 @@ public class EducationMain extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.education_main);
-
+        PackageManager pm = getPackageManager();
+        ImageButton speakButton = (ImageButton) findViewById(R.id.speakButton);
+        List<ResolveInfo> activities = pm.queryIntentActivities(
+        new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+        if (activities.size() != 0) {
+            speakButton.setOnClickListener((OnClickListener) this);
+            speakButton.setImageResource(R.drawable.mic_on);
+        } else {
+        speakButton.setEnabled(false);
+        speakButton.setImageResource(R.drawable.mic_off);
+        }
     }
 
     @Override
@@ -57,8 +72,12 @@ public class EducationMain extends Activity {
         }
     }
     public void successRegistration() {
-    Intent intent = new Intent(this, EducationSelect.class);
-    startActivity(intent);
+        Intent intent = new Intent(this, EducationSelect.class);
+        startActivity(intent);
 
+    }
+    
+    public void recognize(View v) {
+            new Voice().recognize(v);
     }
 }

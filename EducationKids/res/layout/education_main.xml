@@ -23,25 +23,28 @@
          android:layout_marginTop="16dp"
          android:ems="10"
          android:inputType="text"
-         android:text="maximv" />
+         android:text="maximv" /> 
 
-     <Button
-         android:id="@+id/button1"
+     <ImageButton
+         android:id="@+id/speakButton"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/nameKids"
          android:layout_alignBottom="@+id/nameKids"
-         android:onClick="registration"
          android:layout_alignParentRight="true"
+         android:contentDescription="mic"
+         android:onClick="recognize"
+         android:src="@drawable/mic_off"
          android:text="mic" />
 
-    <!--  <Button
+     <Button
          android:id="@+id/loginButton"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignLeft="@+id/nameKids"
          android:layout_alignRight="@+id/nameKids"
-         android:layout_centerVertical="true"
-         android:text="@string/login" /> -->
+         android:layout_below="@+id/nameKids"
+         android:layout_marginTop="28dp"
+         android:onClick="registration"
+         android:text="@string/login" />
 
 </RelativeLayout>
