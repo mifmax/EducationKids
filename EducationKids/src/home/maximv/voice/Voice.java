@@ -48,9 +48,7 @@ public class Voice extends Activity {
             }
             EditText rtext = (EditText) findViewById(R.id.nameKids);
             rtext.setText(resString);
-     
         }
-     
         super.onActivityResult(requestCode, resultCode, data);
     }
 }

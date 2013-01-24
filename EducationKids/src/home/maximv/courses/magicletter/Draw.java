@@ -3,9 +3,9 @@ package home.maximv.courses.magicletter;
 import home.maximv.educationkids.R;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-import android.R.anim;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -14,80 +14,48 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnCreateContextMenuListener;
-/*public class Draw extends Activity{
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-//setContentView(home.maximv.courses.magicletter.Draw);
-	}
-	// идентификаторы для пунктов меню
-	private static final int IDM_OPEN = 101;
-	private static final int IDM_SAVE = 102;
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-	    // добавляем пункты меню
-		menu.add(Menu.NONE, IDM_OPEN, Menu.NONE, "Открыть");
-		menu.add(Menu.NONE, IDM_SAVE, Menu.NONE, "Сохранить");
-		return true;
-	}
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		switch (item.getItemId()){
-		case IDM_OPEN:
-			
-		    return true;
-		case IDM_SAVE:
-		    return true;
-		}	
-		return true	;
-	}*/
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
 
-
-public class Draw extends View implements OnCreateContextMenuListener{
-
+public class Draw extends View {
+    //private int color;
     private Paint paint = new Paint();
     private ArrayList<Point> points = new ArrayList<Point>();
+    private List<Integer> colors = new ArrayList<Integer>();
+    private int ml_pics [] = {R.drawable.ml1, R.drawable.ml2, R.drawable.ml3, R.drawable.ml4, R.drawable.ml5, R.drawable.ml6,
+                               R.drawable.ml7, R.drawable.ml8, R.drawable.ml9, R.drawable.ml10,R.drawable.ml11,R.drawable.ml12, 
+                               R.drawable.ml13,R.drawable.ml14,R.drawable.ml15,R.drawable.ml16,R.drawable.ml17,R.drawable.ml18};
+    private static Random random = new Random(); 
     private ArrayList<ArrayList<Point>> paths =new ArrayList<ArrayList<Point>>();
-    private Context mContext;
+    private int color;
+    
+    static int generateRandom(int n) {
+        return Math.abs(random.nextInt(n)) % n;
+    }
     public Draw(Context context) {
         super(context);
         setFocusable(true);
         setFocusableInTouchMode(true);
-        paint.setColor(Color.WHITE);
-        paint.setAntiAlias(true);
-        mContext = context;
-       /* ContextMenu menu = new ContextMenu(); 
-        menu.add(Menu.NONE, IDM_OPEN, Menu.NONE, "Открыть");
-    	menu.add(Menu.NONE, IDM_SAVE, Menu.NONE, "Сохранить");
-        createContextMenu(menu);*/
-        View pic =  findViewById(R.drawable.bg1);
-        setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-            	selectColor();
-            return true;
-            }
-        });
+
         
+        this.setBackgroundResource(ml_pics[generateRandom(ml_pics.length)]);
+        paint.setColor(Color.BLACK);
+        paint.setAntiAlias(true);
     }
 
    @Override
    public void onDraw(Canvas canvas){
-	    super.onDraw(canvas);
-       this.setBackgroundResource(R.drawable.bg1);
-       //this.setBackgroundColor(Color.WHITE);
-       paint.setColor(Color.GREEN);
-       for(ArrayList<Point> path: paths){
+	   super.onDraw(canvas);
+	   color=paint.getColor();
+       int i=0;
+	   for(ArrayList<Point> path: paths){
+	       paint.setColor(colors.get(i));
+           i++;
            drawPath(path, canvas);
        }
+	   paint.setColor(color);
        drawPath(points, canvas);
     }
 
@@ -101,6 +69,7 @@ public class Draw extends View implements OnCreateContextMenuListener{
            }
        }
    }
+
    @Override
    public boolean onTouchEvent(MotionEvent event){
        switch (event.getActionMasked()) {
@@ -111,54 +80,68 @@ public class Draw extends View implements OnCreateContextMenuListener{
            case MotionEvent.ACTION_UP:
                paths.add(points);
                points = new ArrayList<Point>();
+               colors.add(paint.getColor());
                break;
            default:
                break;
        }
        return true;
    }
-public void selectColor() {
-	Builder builder = new AlertDialog.Builder(getContext());
-	String[] items = {"Красный", "Зелёный", "Синий", "Голубой", "Чёрный", "Белый", "Жёлый", "Розовый"};
-	final AlertDialog dialog = builder.setTitle("Выберите цвет кисти").setItems(items, new DialogInterface.OnClickListener() {
-	    public void onClick(DialogInterface dialog, int which) {
-	        switch (which) {
-	            case 0:				// Красный
-	              paint.setColor(Color.RED);
-	              break;
-	            case 1:				// Зелёный
-	              paint.setColor(Color.GREEN);
-	              break;
-	            case 2:				// Синий
-	              paint.setColor(Color.BLUE);
-	              break;
-	            case 3:				// Голубой
-	              paint.setColor(0xFF99CCFF);
-	              break;
-	            case 4:				// Чёрный
-	              paint.setColor(Color.BLACK);
-	              break;
-	            case 5:				// Белый
-	              paint.setColor(Color.WHITE);
-	              break;
-	            case 6:				// Жёлый
-	              paint.setColor(Color.YELLOW);
-	              break;
-	            case 7:				// Розовый
-	              paint.setColor(0xFFFFCC99);
-	              break;
-	        }
-	    }
-	}).create();
-	dialog.show();
-}
 
-@Override
-public void onCreateContextMenu(ContextMenu menu, View v,
-		ContextMenuInfo menuinfo) {
-	selectColor();
-	
-}
-//}
+ 
+   public void selectColor(View v) {
+       Builder builder = new AlertDialog.Builder(getContext());
+       String[] items = {"Красный", "Зелёный", "Синий", "Голубой", "Чёрный", "Белый", "Жёлый", "Розовый"};
+       final AlertDialog dialog = builder.setTitle("Выберите цвет кисти").setItems(items, new DialogInterface.OnClickListener() {
+           public void onClick(DialogInterface dialog, int which) {
+               switch (which) {
+	                case 0:				// Красный
+	                    paint.setColor(Color.RED);
+	                    break;
+	                case 1:				// Зелёный
+	                    paint.setColor(Color.GREEN);
+	                    break;
+	                case 2:				// Синий
+	                    paint.setColor(Color.BLUE);
+	                    break;
+	                case 3:				// Голубой
+	                    paint.setColor(0xFF99CCFF);
+	                    break;
+	                case 4:				// Чёрный
+	                    paint.setColor(Color.BLACK);
+	                    break;
+	                case 5:				// Белый
+	                    paint.setColor(Color.WHITE);
+	                    break;
+	                case 6:				// Жёлый
+	                    paint.setColor(Color.YELLOW);
+	                    break;
+	                case 7:				// Розовый
+	                    paint.setColor(0xFFFFCC99);
+	                    break;
+               }
+           }
+       }).create();
+       dialog.show();
+   }
+   public void selectLarch(View v) {
+       Builder builder = new AlertDialog.Builder(getContext());
+       builder.setTitle("Настройка размера кисти"); 
+       builder.setMessage("Выберите размер кисти"); 
+       LinearLayout linear=new LinearLayout(getContext()); 
+       linear.setOrientation(1); 
+       SeekBar seek=new SeekBar(getContext()); 
+       linear.addView(seek); 
+       builder.setView(linear); 
+
+       builder.setPositiveButton("Ok",new DialogInterface.OnClickListener() 
+       { 
+           public void onClick(DialogInterface dialog,int id)  
+           { 
+
+           } 
+       }); 
+       builder.show();
+   }
 
 }
