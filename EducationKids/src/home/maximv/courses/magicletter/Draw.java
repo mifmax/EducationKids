@@ -38,8 +38,6 @@ public class Draw extends View {
         super(context);
         setFocusable(true);
         setFocusableInTouchMode(true);
-
-        
         this.setBackgroundResource(ml_pics[generateRandom(ml_pics.length)]);
         paint.setColor(Color.BLACK);
         paint.setAntiAlias(true);
