@@ -24,12 +24,14 @@ public class Draw extends View {
     private Paint paint = new Paint();
     private ArrayList<Point> points = new ArrayList<Point>();
     private List<Integer> colors = new ArrayList<Integer>();
+    private List<Float> sizeHands = new ArrayList<Float>();
     private int ml_pics [] = {R.drawable.ml1, R.drawable.ml2, R.drawable.ml3, R.drawable.ml4, R.drawable.ml5, R.drawable.ml6,
                                R.drawable.ml7, R.drawable.ml8, R.drawable.ml9, R.drawable.ml10,R.drawable.ml11,R.drawable.ml12, 
                                R.drawable.ml13,R.drawable.ml14,R.drawable.ml15,R.drawable.ml16,R.drawable.ml17,R.drawable.ml18};
     private static Random random = new Random(); 
     private ArrayList<ArrayList<Point>> paths =new ArrayList<ArrayList<Point>>();
     private int color;
+    private float sizeHand;
     
     static int generateRandom(int n) {
         return Math.abs(random.nextInt(n)) % n;
@@ -38,6 +40,7 @@ public class Draw extends View {
         super(context);
         setFocusable(true);
         setFocusableInTouchMode(true);
+        
         this.setBackgroundResource(ml_pics[generateRandom(ml_pics.length)]);
         paint.setColor(Color.BLACK);
         paint.setAntiAlias(true);
@@ -47,12 +50,15 @@ public class Draw extends View {
    public void onDraw(Canvas canvas){
 	   super.onDraw(canvas);
 	   color=paint.getColor();
+	   sizeHand=paint.getStrokeWidth();
        int i=0;
 	   for(ArrayList<Point> path: paths){
 	       paint.setColor(colors.get(i));
-           i++;
+	       paint.setStrokeWidth(sizeHands.get(i));
+	       i++;
            drawPath(path, canvas);
        }
+       paint.setStrokeWidth(sizeHand);
 	   paint.setColor(color);
        drawPath(points, canvas);
     }
@@ -79,6 +85,7 @@ public class Draw extends View {
                paths.add(points);
                points = new ArrayList<Point>();
                colors.add(paint.getColor());
+               sizeHands.add(paint.getStrokeWidth());
                break;
            default:
                break;
@@ -128,7 +135,8 @@ public class Draw extends View {
        builder.setMessage("Выберите размер кисти"); 
        LinearLayout linear=new LinearLayout(getContext()); 
        linear.setOrientation(1); 
-       SeekBar seek=new SeekBar(getContext()); 
+       final SeekBar seek=new SeekBar(getContext()); 
+       seek.setProgress((int) (paint.getStrokeWidth()*10));
        linear.addView(seek); 
        builder.setView(linear); 
 
@@ -136,7 +144,7 @@ public class Draw extends View {
        { 
            public void onClick(DialogInterface dialog,int id)  
            { 
-
+               paint.setStrokeWidth(seek.getProgress()/10);
            } 
        }); 
        builder.show();
