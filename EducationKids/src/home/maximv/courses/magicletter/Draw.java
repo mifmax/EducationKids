@@ -16,6 +16,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
@@ -34,7 +35,7 @@ public class Draw extends View {
     private float sizeHand;
     
     static int generateRandom(int n) {
-        return Math.abs(random.nextInt(n)) % n;
+         return Math.abs(random.nextInt(n)) % n;
     }
     public Draw(Context context) {
         super(context);
@@ -95,10 +96,26 @@ public class Draw extends View {
 
  
    public void selectColor(View v) {
+	  /* OnAmbilWarnaListener listener = new OnAmbilWarnaListener() {
+		
+		@Override
+		public void onCancel(AmbilWarnaDialog dialog) {
+		}
+
+		@Override
+		public void onOk(AmbilWarnaDialog dialog, int color) {
+			paint.setColor(color);
+			
+		}
+	};*/
+	//   AmbilWarnaDialog colorSelectDialog = new AmbilWarnaDialog(getContext(), Color.BLACK, listener);
+	//   colorSelectDialog.show();
+	   
        Builder builder = new AlertDialog.Builder(getContext());
-       String[] items = {"Красный", "Зелёный", "Синий", "Голубой", "Чёрный", "Белый", "Жёлый", "Розовый"};
-       final AlertDialog dialog = builder.setTitle("Выберите цвет кисти").setItems(items, new DialogInterface.OnClickListener() {
-           public void onClick(DialogInterface dialog, int which) {
+       String[] items = {"Красный", "Зелёный", "Синий", "Голубой", "Чёрный", "Белый", "Жёлый", "Розовый","Коричневый"};
+       final AlertDialog dialog = builder.setTitle("Выберите цвет кисти").setView(findViewById(R.layout.selectcolor)).setItems(items, new DialogInterface.OnClickListener() {
+    	   
+    	   public void onClick(DialogInterface dialog, int which) {
                switch (which) {
 	                case 0:				// Красный
 	                    paint.setColor(Color.RED);
@@ -124,9 +141,14 @@ public class Draw extends View {
 	                case 7:				// Розовый
 	                    paint.setColor(0xFFFFCC99);
 	                    break;
+	                case 8:				// Коричневый
+	                    paint.setColor(0xFF8B4513);
+	                    break;
+	                    
                }
            }
        }).create();
+       dialog.setContentView((GridView) findViewById(R.layout.selectcolor));
        dialog.show();
    }
    public void selectLarch(View v) {
