@@ -1,7 +1,8 @@
 package home.maximv.educationkids;
 
-import home.maximv.voice.Voice;
+import home.maximv.utils.SpeechToText;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -18,6 +19,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import home.maximv.utils.SpeechRecognition;
+
 public class EducationMain extends Activity {
     
     private SharedPreferences sPref;
@@ -36,6 +39,7 @@ public class EducationMain extends Activity {
         speakButton.setEnabled(false);
         speakButton.setImageResource(R.drawable.mic_off);
         }
+        new SpeechToText("Здравствуйте, представьтесь пожалуйста!").start();
     }
 
     @Override
@@ -77,6 +81,26 @@ public class EducationMain extends Activity {
     }
     
     public void recognize(View v) {
-            new Voice().recognize(v);
+    	SpeechRecognition.run(this);
+            //new Voice().recognize(v);
+    }
+    /**
+     * Handle the results from the recognition activity.
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SpeechRecognition.VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
+            // Fill the list view with the strings the recognizer thought it could have heard
+            ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            String resString = "";
+            for (String s : matches)
+            {
+                resString += s;
+            }
+            resString.trim();
+            EditText rtext = (EditText) findViewById(R.id.nameKids);
+            rtext.setText(resString);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
