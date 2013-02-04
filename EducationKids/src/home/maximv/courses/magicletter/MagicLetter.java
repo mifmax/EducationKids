@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Random;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -43,6 +44,14 @@ public class MagicLetter extends GraphicsActivity implements
     private Paint mPaint;
     private MaskFilter mEmboss;
     private MaskFilter mBlur;
+    private int ml_pics [] = {R.drawable.ml1, R.drawable.ml2, R.drawable.ml3, R.drawable.ml4, R.drawable.ml5, R.drawable.ml6,
+            R.drawable.ml7, R.drawable.ml8, R.drawable.ml9, R.drawable.ml10,R.drawable.ml11,R.drawable.ml12, 
+            R.drawable.ml13,R.drawable.ml14,R.drawable.ml15,R.drawable.ml16,R.drawable.ml17,R.drawable.ml18};
+    private static Random random = new Random(); 
+    
+    static int generateRandom(int n) {
+        return Math.abs(random.nextInt(n)) % n;
+    }
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +63,7 @@ public class MagicLetter extends GraphicsActivity implements
 		mPaint = draw.mPaint;
 		mPaint.setAntiAlias(true);
 		mPaint.setDither(true);
-		mPaint.setColor(0xFFF00000);
+		//mPaint.setColor(0xFFF00000);
 		mPaint.setStyle(Paint.Style.STROKE);
 		mPaint.setStrokeJoin(Paint.Join.ROUND);
 		mPaint.setStrokeCap(Paint.Cap.ROUND);

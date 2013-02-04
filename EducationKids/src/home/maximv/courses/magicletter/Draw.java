@@ -1,12 +1,19 @@
 package home.maximv.courses.magicletter;
 
+import home.maximv.educationkids.R;
+
+import java.util.Random;
+
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Picture;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 
 public class Draw extends View {
 
@@ -17,14 +24,24 @@ public class Draw extends View {
     protected Paint mPaint;
     private float mX, mY;
     private static final float TOUCH_TOLERANCE = 4;
+    private int ml_pics [] = {R.drawable.ml1, R.drawable.ml2, R.drawable.ml3, R.drawable.ml4, R.drawable.ml5, R.drawable.ml6,
+            R.drawable.ml7, R.drawable.ml8, R.drawable.ml9, R.drawable.ml10,R.drawable.ml11,R.drawable.ml12, 
+            R.drawable.ml13,R.drawable.ml14,R.drawable.ml15,R.drawable.ml16,R.drawable.ml17,R.drawable.ml18};
+    private static Random random = new Random(); 
+    
+    static int generateRandom(int n) {
+        return Math.abs(random.nextInt(n)) % n;
+    }
 
-    public Draw(Context c) {
-        super(c);
+    public Draw(Context context) {
+        super(context);
         mPaint = new Paint();
         mBitmap = Bitmap.createBitmap(1024, 1024, Bitmap.Config.ARGB_8888);
+        mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ml3);
         mCanvas = new Canvas(mBitmap);
         mPath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+        this.setBackgroundResource(R.drawable.ml1);
     }
 
     @Override
