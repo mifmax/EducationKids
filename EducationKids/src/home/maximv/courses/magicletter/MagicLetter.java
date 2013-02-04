@@ -27,15 +27,17 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,12 +47,40 @@ public class MagicLetter extends GraphicsActivity implements
     private Paint mPaint;
     private MaskFilter mEmboss;
     private MaskFilter mBlur;
+    int buttonid=12345;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		Draw draw = new Draw(this);
-		setContentView(draw);
+		
+	    ImageView pensilRed = new ImageView(this);
+	    pensilRed.setId(buttonid+1);
+	    pensilRed.setImageResource(R.drawable.pen_black1);
+	    ImageView pensilyellow = new ImageView(this);
+	    pensilyellow.setId(buttonid+2);
+	    pensilyellow.setImageResource(R.drawable.pen_red);
+
+		
+	    LinearLayout ll = new LinearLayout(this);
+	    	LinearLayout llchild = new LinearLayout(this);
+	    	llchild.setGravity(Gravity.TOP); 
+	    	llchild.setOrientation(LinearLayout.HORIZONTAL); 
+
+	    ll.setOrientation(LinearLayout.VERTICAL); 
+	    ll.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT)); 
+	    llchild.addView(pensilyellow);
+	    llchild.addView(pensilRed);
+	    ll.addView(llchild);
+
+	    ll.setGravity(Gravity.TOP); 
+
+	    ll.addView(draw); 
+	    setContentView(ll); 
+
+		
+		
+		//setContentView(draw);
 		mPaint = draw.mPaint;
 		mPaint.setAntiAlias(true);
 		mPaint.setDither(true);

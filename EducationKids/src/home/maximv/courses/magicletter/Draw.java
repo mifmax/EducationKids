@@ -30,8 +30,8 @@ public class Draw extends View {
             R.drawable.ml7, R.drawable.ml8, R.drawable.ml9, R.drawable.ml10,R.drawable.ml11,R.drawable.ml12, 
             R.drawable.ml13,R.drawable.ml14,R.drawable.ml15,R.drawable.ml16,R.drawable.ml17,R.drawable.ml18};
     private static Random random = new Random(); 
-    
-    static int generateRandom(int n) {
+
+	private static int generateRandom(int n) {
         return Math.abs(random.nextInt(n)) % n;
     }
 
@@ -42,11 +42,12 @@ public class Draw extends View {
         mBitmap = BitmapFactory.decodeResource(getResources(), ml_pics[generateRandom(ml_pics.length)]);
         DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
         widthDisplay = displaymetrics.widthPixels;
-        heightDisplay = mBitmap.getWidth()*widthDisplay/mBitmap.getWidth();
-        mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay,heightDisplay, false);
+        heightDisplay = widthDisplay/mBitmap.getWidth()>1?mBitmap.getWidth()*widthDisplay/mBitmap.getWidth():mBitmap.getWidth()*mBitmap.getWidth()/widthDisplay;
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay,heightDisplay+30, false);
         mCanvas = new Canvas(mBitmap);
         mPath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+	
     }
 
     @Override

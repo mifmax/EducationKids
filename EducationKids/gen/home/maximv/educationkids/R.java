@@ -73,11 +73,14 @@ public final class R {
         public static final int ml8=0x7f02002c;
         public static final int ml9=0x7f02002d;
         public static final int mzl=0x7f02002e;
-        public static final int save=0x7f02002f;
-        public static final int share=0x7f020030;
-        public static final int size=0x7f020031;
-        public static final int splash=0x7f020032;
-        public static final int splash_xhdpi=0x7f020033;
+        public static final int pen_black=0x7f02002f;
+        public static final int pen_black1=0x7f020030;
+        public static final int pen_red=0x7f020031;
+        public static final int save=0x7f020032;
+        public static final int share=0x7f020033;
+        public static final int size=0x7f020034;
+        public static final int splash=0x7f020035;
+        public static final int splash_xhdpi=0x7f020036;
     }
     public static final class id {
         public static final int ABOUT=0x7f0b0019;
@@ -111,9 +114,10 @@ public final class R {
         public static final int brush=0x7f030000;
         public static final int education_main=0x7f030001;
         public static final int education_select=0x7f030002;
-        public static final int itemcolorselect=0x7f030003;
-        public static final int main=0x7f030004;
-        public static final int selectcolor=0x7f030005;
+        public static final int erase_layout=0x7f030003;
+        public static final int itemcolorselect=0x7f030004;
+        public static final int main=0x7f030005;
+        public static final int selectcolor=0x7f030006;
     }
     public static final class menu {
         public static final int education_main=0x7f0a0000;

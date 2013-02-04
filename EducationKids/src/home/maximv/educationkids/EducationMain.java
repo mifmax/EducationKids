@@ -67,7 +67,7 @@ public class EducationMain extends Activity {
         login = (EditText) findViewById(R.id.nameKids);
 
         String name = sPref.getString(login.getText().toString(), "");
-        if (name != "") {
+        if (name == "") {
             Toast.makeText(this, name+", вы успешно вошли в систему! ", Toast.LENGTH_SHORT).show();
             successRegistration();
         }else {
