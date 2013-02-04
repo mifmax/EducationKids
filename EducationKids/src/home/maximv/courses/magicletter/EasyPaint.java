@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-package anupam.acrylic;
+package home.maximv.courses.magicletter;
+
+import home.maximv.educationkids.R;
+import home.maximv.utils.ColorPickerDialog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -334,16 +337,16 @@ public class EasyPaint extends GraphicsActivity implements
 			i.setAction(Intent.ACTION_SEND);
 			i.setType("image/png");
 			i.putExtra(Intent.EXTRA_SUBJECT,
-					getString(anupam.acrylic.R.string.share_title_template));
+					getString(home.maximv.educationkids.R.string.share_title_template));
 			i.putExtra(Intent.EXTRA_TEXT,
-					getString(anupam.acrylic.R.string.share_text_template));
+					getString(home.maximv.educationkids.R.string.share_text_template));
 			i.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(screenshotPath));
 			try {
 				startActivity(Intent.createChooser(i,
-						getString(anupam.acrylic.R.string.toolbox_share_title)));
+						getString(home.maximv.educationkids.R.string.toolbox_share_title)));
 			} catch (android.content.ActivityNotFoundException ex) {
 				Toast.makeText(this.getApplicationContext(),
-						anupam.acrylic.R.string.no_way_to_share,
+				        home.maximv.educationkids.R.string.no_way_to_share,
 						Toast.LENGTH_LONG).show();
 			}
 			break;

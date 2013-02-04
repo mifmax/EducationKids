@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package anupam.acrylic;
+package home.maximv.utils;
 
 import android.app.Dialog;
 import android.content.Context;

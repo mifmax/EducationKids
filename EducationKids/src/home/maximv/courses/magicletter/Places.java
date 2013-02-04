@@ -1,4 +1,4 @@
-package anupam.acrylic;
+package home.maximv.courses.magicletter;
 
 import java.io.File;
 import java.io.IOException;

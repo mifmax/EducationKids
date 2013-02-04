@@ -1,10 +1,10 @@
-package anupam.acrylic;
+package home.maximv.courses.magicletter;
 
+import home.maximv.educationkids.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import anupam.acrylic.R;
 
 public class Splash extends Activity {
 

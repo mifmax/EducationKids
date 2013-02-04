@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package anupam.acrylic;
+package home.maximv.courses.magicletter;
 
 import android.content.Context;
 import android.graphics.Canvas;
