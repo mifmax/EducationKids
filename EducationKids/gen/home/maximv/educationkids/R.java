@@ -75,6 +75,15 @@ public final class R {
         public static final int splash_xhdpi=0x7f02002e;
     }
     public static final class id {
+        public static final int ABOUT=0x7f0b0019;
+        public static final int BLUR_MENU_ID=0x7f0b0013;
+        public static final int CLEAR_ALL=0x7f0b0016;
+        public static final int COLOR_MENU_ID=0x7f0b0011;
+        public static final int EMBOSS_MENU_ID=0x7f0b0012;
+        public static final int ERASE_MENU_ID=0x7f0b0015;
+        public static final int SAVE=0x7f0b0017;
+        public static final int SHARE=0x7f0b0018;
+        public static final int SIZE_MENU_ID=0x7f0b0014;
         public static final int admin=0x7f0b000e;
         public static final int button1=0x7f0b000b;
         public static final int button2=0x7f0b000d;
@@ -103,8 +112,18 @@ public final class R {
     }
     public static final class menu {
         public static final int education_main=0x7f0a0000;
+        public static final int magicletter_menu=0x7f0a0001;
     }
     public static final class string {
+        public static final int ABOUT=0x7f080015;
+        public static final int BLUR_MENU_ID=0x7f08000f;
+        public static final int CLEAR_ALL=0x7f080012;
+        public static final int COLOR_MENU_ID=0x7f08000d;
+        public static final int EMBOSS_MENU_ID=0x7f08000e;
+        public static final int ERASE_MENU_ID=0x7f080011;
+        public static final int SAVE=0x7f080013;
+        public static final int SHARE=0x7f080014;
+        public static final int SIZE_MENU_ID=0x7f080010;
         public static final int admin=0x7f080004;
         public static final int app_name=0x7f080000;
         public static final int courses_name=0x7f080008;
