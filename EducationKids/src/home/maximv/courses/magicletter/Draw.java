@@ -15,6 +15,8 @@ public class Draw extends View {
     private Path mPath;
     private Paint mBitmapPaint;
     protected Paint mPaint;
+    private float mX, mY;
+    private static final float TOUCH_TOLERANCE = 4;
 
     public Draw(Context c) {
         super(c);
@@ -33,14 +35,9 @@ public class Draw extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(0xFFFFFFFF);
-
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
-
         canvas.drawPath(mPath, mPaint);
     }
-
-    private float mX, mY;
-    private static final float TOUCH_TOLERANCE = 4;
 
     private void touch_start(float x, float y) {
         mPath.reset();
@@ -61,9 +58,7 @@ public class Draw extends View {
 
     private void touch_up() {
         mPath.lineTo(mX, mY);
-        // commit the path to our offscreen
         mCanvas.drawPath(mPath, mPaint);
-        // kill this so we don't double draw
         mPath.reset();
     }
 
