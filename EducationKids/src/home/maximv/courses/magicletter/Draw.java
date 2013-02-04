@@ -10,10 +10,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Picture;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 
 public class Draw extends View {
 
@@ -22,6 +21,9 @@ public class Draw extends View {
     private Path mPath;
     private Paint mBitmapPaint;
     protected Paint mPaint;
+    private int widthDisplay;
+    private int heightDisplay;
+
     private float mX, mY;
     private static final float TOUCH_TOLERANCE = 4;
     private int ml_pics [] = {R.drawable.ml1, R.drawable.ml2, R.drawable.ml3, R.drawable.ml4, R.drawable.ml5, R.drawable.ml6,
@@ -37,11 +39,14 @@ public class Draw extends View {
         super(context);
         mPaint = new Paint();
         mBitmap = Bitmap.createBitmap(1024, 1024, Bitmap.Config.ARGB_8888);
-        mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ml3);
+        mBitmap = BitmapFactory.decodeResource(getResources(), ml_pics[generateRandom(ml_pics.length)]);
+        DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
+        widthDisplay = displaymetrics.widthPixels;
+        heightDisplay = mBitmap.getWidth()*widthDisplay/mBitmap.getWidth();
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay,heightDisplay, false);
         mCanvas = new Canvas(mBitmap);
         mPath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
-        this.setBackgroundResource(R.drawable.ml1);
     }
 
     @Override
