@@ -10,5 +10,9 @@
     <string name="registration">Регистрация</string>
     <string name="no_courses_found">Разделы не найдены!</string>
     <string name="courses_name">Выберите раздел!</string>
-
+   <string name="share_title_template">See what dearest painted</string>
+    <string name="share_text_template"></string>
+     <string name="toolbox_share_title">Share</string>
+     <string name="no_way_to_share">Can locate an app to share with...</string>
+    
 </resources>
