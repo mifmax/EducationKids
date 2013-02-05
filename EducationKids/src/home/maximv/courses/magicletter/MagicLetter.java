@@ -30,16 +30,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,7 +46,6 @@ public class MagicLetter extends GraphicsActivity implements
     private Paint mPaint;
     private MaskFilter mEmboss;
     private MaskFilter mBlur;
-    private final int buttonid=200;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,67 +53,7 @@ public class MagicLetter extends GraphicsActivity implements
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		Draw draw = new Draw(this);
 
-	/*	ImageView pen_black = new ImageView(this);
-        pen_black.setId(buttonid+1);
-        pen_black.setImageResource(R.drawable.pen_black);
-        pen_black.setOnClickListener(onChangeColorClick);
-        
-        ImageView pen_red = new ImageView(this);
-	    pen_red.setId(buttonid+2);
-	    pen_red.setImageResource(R.drawable.pen_red);
-	    pen_red.setOnClickListener(onChangeColorClick);
-	    
-	    ImageView pen_yellow = new ImageView(this);
-	    pen_yellow.setId(buttonid+3);
-	    pen_yellow.setImageResource(R.drawable.pen_yellow);
-	    pen_yellow.setOnClickListener(onChangeColorClick);
-
-        
-        ImageView pen_blue = new ImageView(this);
-        pen_blue.setId(buttonid+4);
-        pen_blue.setImageResource(R.drawable.pen_blue);
-        pen_blue.setOnClickListener(onChangeColorClick);
-        
-        ImageView pen_brown = new ImageView(this);
-        pen_brown.setId(buttonid+5);
-        pen_brown.setImageResource(R.drawable.pen_brown);
-        pen_brown.setOnClickListener(onChangeColorClick);
-        
-        ImageView pen_green = new ImageView(this);
-        pen_green.setId(buttonid+6);
-        pen_green.setImageResource(R.drawable.pen_green);
-        pen_green.setOnClickListener(onChangeColorClick);
-        
-        ImageView pen_rose = new ImageView(this);
-        pen_rose.setId(buttonid+7);
-        pen_rose.setImageResource(R.drawable.pen_rose);
-        pen_rose.setOnClickListener(onChangeColorClick);
-        
-        ImageView pen_violet = new ImageView(this);
-        pen_violet.setId(buttonid+8);
-        pen_violet.setImageResource(R.drawable.pen_violet);
-        pen_violet.setOnClickListener(onChangeColorClick);
-
-        ImageView pen_emboss = new ImageView(this);
-        pen_emboss.setId(buttonid+9);
-        pen_emboss.setImageResource(R.drawable.emboss);
-        pen_emboss.setOnClickListener(onChangeColorClick);
-
-        ImageView erase = new ImageView(this);
-        erase.setId(buttonid+10);
-        erase.setImageResource(R.drawable.erase);
-        erase.setOnClickListener(onChangeColorClick);
-
-        ImageView blur = new ImageView(this);
-        blur.setId(buttonid+11);
-        blur.setImageResource(R.drawable.blur);
-        blur.setOnClickListener(onChangeColorClick);
-
-        ImageView sheid = new ImageView(this);
-        sheid.setId(buttonid+12);
-        sheid.setImageResource(R.drawable.sheid);
-        sheid.setOnClickListener(onChangeColorClick);
-
+	/**
         ImageView simple = new ImageView(this);
         simple.setId(buttonid+13);
         simple.setImageResource(R.drawable.simple);
@@ -133,11 +69,11 @@ public class MagicLetter extends GraphicsActivity implements
         size.setImageResource(R.drawable.size);
         size.setOnClickListener(onChangeColorClick);
 
-        
+       
 	    LinearLayout llchild = new LinearLayout(this);
-	    llchild.setGravity(Gravity.TOP); 
-	    llchild.setOrientation(LinearLayout.HORIZONTAL); 
-        llchild.addView(pen_black);
+	    llchild.setGravity(Gravity.CENTER); 
+      
+	    llchild.addView(pen_black);
         llchild.addView(pen_red);
         llchild.addView(pen_yellow);
         llchild.addView(pen_blue);
@@ -148,18 +84,23 @@ public class MagicLetter extends GraphicsActivity implements
         llchild.addView(pen_emboss);
         llchild.addView(blur);
         llchild.addView(erase);
-   */
+  
+	    llchild.setPadding(0, 0, 0, 50);
+	  //  llchild.addView(draw);
+	    llchild.setGravity(Gravity.TOP);
+	    llchild.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)); 
+	    draw.setPadding(0, 0, 0, 50);
 	    LinearLayout ll = new LinearLayout(this);
 	    ll.setOrientation(LinearLayout.VERTICAL); 
 	    ll.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT)); 
 	    ll.setGravity(Gravity.TOP);
         getLayoutInflater().inflate(R.layout.color_panel, ll);
-        
-       // ll.addView(draw); 
-        LinearLayout llchild = (LinearLayout) getLayoutInflater().inflate(R.layout.color_panel_top, ll);
-        llchild.addView(draw,1);
-       // ll.addView(llchild); 
-        setContentView(ll); 
+       ll.addView(draw); 
+        //ll.addView(llchild);
+  
+        getLayoutInflater().inflate(R.layout.color_panel_top, ll);
+        */
+        setContentView(R.layout.color_panel); 
 
 		mPaint = draw.mPaint;
 		mPaint.setAntiAlias(true);
@@ -240,76 +181,6 @@ public class MagicLetter extends GraphicsActivity implements
      
             }  
     }
-	
-	OnClickListener onChangeColorClick = new OnClickListener() {
-	    @Override
-	    public void onClick(View v) {
-            mPaint.setXfermode(null);
-            mPaint.setAlpha(0xFF);
-
-	        switch (v.getId()) {
-            case buttonid+1:
-                mPaint.setColor(Color.BLACK);
-                break;
-
-            case buttonid+2:
-                mPaint.setColor(Color.RED);
-                break;
-
-            case buttonid+3:
-                mPaint.setColor(Color.YELLOW);
-                break;
-
-            case buttonid+4:
-                mPaint.setColor(Color.BLUE);
-                break;
-
-            case buttonid+5:
-                mPaint.setColor(Color.rgb(165, 42, 42));
-                break;
-
-            case buttonid+6:
-                mPaint.setColor(Color.GREEN);
-                break;
-
-            case buttonid+7:
-                mPaint.setColor(Color.rgb(255, 105, 180));
-                break;
-
-            case buttonid+8:
-                mPaint.setColor(Color.MAGENTA);
-                break;
-
-            case buttonid+9:
-                mPaint.setShader(null);
-                if (mPaint.getMaskFilter() != mEmboss) {
-                    mPaint.setMaskFilter(mEmboss);
-                } else {
-                    mPaint.setMaskFilter(null);
-                }
-                break;
-
-            case buttonid+10:
-                mPaint.setShader(null);
-                mPaint.setColor(Color.WHITE);
-                mPaint.setXfermode(new PorterDuffXfermode(Mode.LIGHTEN));
-                break;
-
-            case buttonid+11:
-                mPaint.setShader(null);
-                if (mPaint.getMaskFilter() != mBlur) {
-                    mPaint.setMaskFilter(mBlur);
-                } else {
-                    mPaint.setMaskFilter(null);
-                }
-                break;
-            case buttonid+12:
-                mPaint.setShader(new RadialGradient(8f, 80f, 90f, mPaint.getColor(),Color.WHITE, Shader.TileMode.MIRROR));
-                break;
-     
-	        }
-	    }
-	};
 	
 	public void colorChanged(int color) {
 		mPaint.setColor(color);

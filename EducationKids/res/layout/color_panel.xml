@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
    android:layout_width="wrap_content"
    android:layout_height="wrap_content"
    android:orientation="horizontal"
+   android:background="#00777777"
    android:gravity="top">
  
      <ImageView
@@ -61,55 +66,89 @@
          android:onClick="onPenClick"
          android:src="@drawable/pen_violet" />
 
-     <ImageView
-         android:id="@+id/android:pen_emboss"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:onClick="onPenClick"
-         android:src="@drawable/emboss" />
+     
+</LinearLayout>
 
-     <ImageView
-         android:id="@+id/android:erase"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:onClick="onPenClick"
-         android:src="@drawable/erase" />
+<RelativeLayout 
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:layout_alignParentBottom="true"
+    android:background="@color/background"
+    android:gravity="bottom"
+    android:orientation="horizontal" >
 
-     <ImageView
-         android:id="@+id/android:sheid"
-         android:layout_width="wrap_content"
+     <home.maximv.courses.magicletter.Draw
+         android:id="@+id/draw1"
+         android:layout_width="fill_parent"
          android:layout_height="wrap_content"
-         android:onClick="onPenClick"
-         android:src="@drawable/sheid" />
-
-     <ImageView
-         android:id="@+id/android:blur"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:onClick="onPenClick"
-         android:src="@drawable/blur" />
-
-     <ImageView
-         android:id="@+id/android:simple"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:onClick="onPenClick"
-         android:src="@drawable/simple" />
+         android:layout_above="@+id/android:simple"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentTop="true"
+         android:layout_marginTop="40dp" />
 
      <ImageView
          android:id="@+id/android:clear_all"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_alignParentLeft="true"
          android:onClick="onPenClick"
          android:src="@drawable/clear_all" />
+
+     <ImageView
+         android:id="@+id/android:pen_emboss"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_toRightOf="@+id/android:clear_all"
+         android:onClick="onPenClick"
+         android:src="@drawable/emboss" />
 
      <ImageView
          android:id="@+id/android:size"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_toRightOf="@+id/android:pen_emboss"
          android:onClick="onPenClick"
          android:src="@drawable/size" />
- 
-</LinearLayout>
 
+     <ImageView
+         android:id="@+id/android:simple"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_toRightOf="@+id/android:size"
+         android:onClick="onPenClick"
+         android:src="@drawable/simple" />
+
+     <ImageView
+         android:id="@+id/android:blur"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_toRightOf="@+id/android:simple"
+         android:onClick="onPenClick"
+         android:src="@drawable/blur" />
+
+     <ImageView
+         android:id="@+id/android:sheid"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_toRightOf="@+id/android:blur"
+         android:onClick="onPenClick"
+         android:src="@drawable/sheid" />
+
+     <ImageView
+         android:id="@+id/android:erase"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentBottom="true"
+         android:layout_alignParentRight="true"
+         android:onClick="onPenClick"
+         android:src="@drawable/erase" />
+
+</RelativeLayout>
+</RelativeLayout>
    

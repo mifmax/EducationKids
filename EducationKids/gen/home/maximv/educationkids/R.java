@@ -15,6 +15,7 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
+        public static final int background=0x7f050004;
         public static final int black=0x7f050000;
         public static final int blue=0x7f050003;
         public static final int red=0x7f050002;
@@ -99,47 +100,48 @@ public final class R {
         public static final int zv=0x7f020045;
     }
     public static final class id {
-        public static final int ABOUT=0x7f0b0028;
-        public static final int BLUR_MENU_ID=0x7f0b0022;
-        public static final int CLEAR_ALL=0x7f0b0025;
-        public static final int COLOR_MENU_ID=0x7f0b0020;
-        public static final int EMBOSS_MENU_ID=0x7f0b0021;
-        public static final int ERASE_MENU_ID=0x7f0b0024;
-        public static final int SAVE=0x7f0b0026;
-        public static final int SHARE=0x7f0b0027;
-        public static final int SIZE_MENU_ID=0x7f0b0023;
-        public static final int admin=0x7f0b001d;
-        public static final int android_blur=0x7f0b0010;
-        public static final int android_clear_all=0x7f0b0012;
-        public static final int android_erase=0x7f0b000e;
+        public static final int ABOUT=0x7f0b0029;
+        public static final int BLUR_MENU_ID=0x7f0b0023;
+        public static final int CLEAR_ALL=0x7f0b0026;
+        public static final int COLOR_MENU_ID=0x7f0b0021;
+        public static final int EMBOSS_MENU_ID=0x7f0b0022;
+        public static final int ERASE_MENU_ID=0x7f0b0025;
+        public static final int SAVE=0x7f0b0027;
+        public static final int SHARE=0x7f0b0028;
+        public static final int SIZE_MENU_ID=0x7f0b0024;
+        public static final int admin=0x7f0b001e;
+        public static final int android_blur=0x7f0b0012;
+        public static final int android_clear_all=0x7f0b000f;
+        public static final int android_erase=0x7f0b0014;
         public static final int android_pen_black=0x7f0b0005;
         public static final int android_pen_blue=0x7f0b0008;
         public static final int android_pen_brown=0x7f0b0009;
-        public static final int android_pen_emboss=0x7f0b000d;
+        public static final int android_pen_emboss=0x7f0b0010;
         public static final int android_pen_green=0x7f0b000a;
         public static final int android_pen_red=0x7f0b0006;
         public static final int android_pen_rose=0x7f0b000b;
         public static final int android_pen_violet=0x7f0b000c;
         public static final int android_pen_yellow=0x7f0b0007;
-        public static final int android_sheid=0x7f0b000f;
-        public static final int android_simple=0x7f0b0011;
-        public static final int android_size=0x7f0b0013;
-        public static final int button1=0x7f0b001a;
-        public static final int button2=0x7f0b001c;
-        public static final int colorSelectTable=0x7f0b0019;
-        public static final int gridView1=0x7f0b001b;
-        public static final int loginButton=0x7f0b0017;
-        public static final int nameKids=0x7f0b0015;
-        public static final int preferences=0x7f0b001f;
-        public static final int present=0x7f0b0014;
-        public static final int registration=0x7f0b001e;
+        public static final int android_sheid=0x7f0b0013;
+        public static final int android_simple=0x7f0b000e;
+        public static final int android_size=0x7f0b0011;
+        public static final int button1=0x7f0b001b;
+        public static final int button2=0x7f0b001d;
+        public static final int colorSelectTable=0x7f0b001a;
+        public static final int draw1=0x7f0b000d;
+        public static final int gridView1=0x7f0b001c;
+        public static final int loginButton=0x7f0b0018;
+        public static final int nameKids=0x7f0b0016;
+        public static final int preferences=0x7f0b0020;
+        public static final int present=0x7f0b0015;
+        public static final int registration=0x7f0b001f;
         public static final int root=0x7f0b0000;
         public static final int seekBar1=0x7f0b0001;
         public static final int select_size=0x7f0b0004;
         public static final int size_value=0x7f0b0003;
-        public static final int speakButton=0x7f0b0016;
+        public static final int speakButton=0x7f0b0017;
         public static final int textView1=0x7f0b0002;
-        public static final int tvText=0x7f0b0018;
+        public static final int tvText=0x7f0b0019;
     }
     public static final class layout {
         public static final int brush=0x7f030000;

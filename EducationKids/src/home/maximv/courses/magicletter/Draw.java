@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,8 +48,17 @@ public class Draw extends View {
         mCanvas = new Canvas(mBitmap);
         mPath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
-	
     }
+    public Draw(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		 mPaint = new Paint();
+	        mBitmap = Bitmap.createBitmap(1024, 1024, Bitmap.Config.ARGB_8888);
+	}
+
+	public Draw(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	        mBitmap = Bitmap.createBitmap(1024, 1024, Bitmap.Config.ARGB_8888);
+	}
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -107,4 +117,5 @@ public class Draw extends View {
         }
         return true;
     }
+
 }
