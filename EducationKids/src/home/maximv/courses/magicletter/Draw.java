@@ -38,6 +38,15 @@ public class Draw extends View {
 
     public Draw(Context context) {
         super(context);
+    }
+   /* public Draw(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		 mPaint = new Paint();
+	        mBitmap = Bitmap.createBitmap(1024, 1024, Bitmap.Config.ARGB_8888);
+	}
+*/
+	public Draw(Context context, AttributeSet attrs) {
+		super(context, attrs);
         mPaint = new Paint();
         mBitmap = Bitmap.createBitmap(1024, 1024, Bitmap.Config.ARGB_8888);
         mBitmap = BitmapFactory.decodeResource(getResources(), ml_pics[generateRandom(ml_pics.length)]);
@@ -48,16 +57,6 @@ public class Draw extends View {
         mCanvas = new Canvas(mBitmap);
         mPath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
-    }
-    public Draw(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		 mPaint = new Paint();
-	        mBitmap = Bitmap.createBitmap(1024, 1024, Bitmap.Config.ARGB_8888);
-	}
-
-	public Draw(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	        mBitmap = Bitmap.createBitmap(1024, 1024, Bitmap.Config.ARGB_8888);
 	}
 
     @Override
@@ -67,8 +66,7 @@ public class Draw extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        
-        canvas.drawColor(0xFFFFFFFF);
+      //  canvas.drawColor(0xFFFFFFFF);
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
         canvas.drawPath(mPath, mPaint);
     }

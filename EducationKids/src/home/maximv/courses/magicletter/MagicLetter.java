@@ -51,7 +51,7 @@ public class MagicLetter extends GraphicsActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		Draw draw = new Draw(this);
+		Draw draw = new Draw(this,null);
 
 	/**
         ImageView simple = new ImageView(this);
