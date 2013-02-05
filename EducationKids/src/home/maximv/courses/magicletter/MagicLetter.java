@@ -39,7 +39,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -155,9 +154,13 @@ public class MagicLetter extends GraphicsActivity implements
 	    ll.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT)); 
 	    ll.setGravity(Gravity.TOP);
         getLayoutInflater().inflate(R.layout.color_panel, ll);
-	    ll.addView(draw); 
-	    setContentView(ll); 
-		
+        
+       // ll.addView(draw); 
+        LinearLayout llchild = (LinearLayout) getLayoutInflater().inflate(R.layout.color_panel_top, ll);
+        llchild.addView(draw,1);
+       // ll.addView(llchild); 
+        setContentView(ll); 
+
 		mPaint = draw.mPaint;
 		mPaint.setAntiAlias(true);
 		mPaint.setDither(true);
@@ -172,9 +175,71 @@ public class MagicLetter extends GraphicsActivity implements
 	}
 	
     public void onPenClick(View v) {
-        
-    }
+            mPaint.setXfermode(null);
+            mPaint.setAlpha(0xFF);
 
+            switch (v.getId()) {
+            case R.id.android_pen_black:
+                mPaint.setColor(Color.BLACK);
+                break;
+
+            case R.id.android_pen_red:
+                mPaint.setColor(Color.RED);
+                break;
+
+            case R.id.android_pen_yellow:
+                mPaint.setColor(Color.YELLOW);
+                break;
+
+            case R.id.android_pen_blue:
+                mPaint.setColor(Color.BLUE);
+                break;
+
+            case R.id.android_pen_brown:
+                mPaint.setColor(Color.rgb(165, 42, 42));
+                break;
+
+            case R.id.android_pen_green:
+                mPaint.setColor(Color.GREEN);
+                break;
+
+            case R.id.android_pen_rose:
+                mPaint.setColor(Color.rgb(255, 105, 180));
+                break;
+
+            case R.id.android_pen_violet:
+                mPaint.setColor(Color.MAGENTA);
+                break;
+
+            case R.id.android_pen_emboss:
+                mPaint.setShader(null);
+                if (mPaint.getMaskFilter() != mEmboss) {
+                    mPaint.setMaskFilter(mEmboss);
+                } else {
+                    mPaint.setMaskFilter(null);
+                }
+                break;
+
+            case R.id.android_erase:
+                mPaint.setShader(null);
+               // mPaint.setColor(Color.WHITE);
+                mPaint.setXfermode(new PorterDuffXfermode(Mode.LIGHTEN));
+                break;
+
+            case R.id.android_blur:
+                mPaint.setShader(null);
+                if (mPaint.getMaskFilter() != mBlur) {
+                    mPaint.setMaskFilter(mBlur);
+                } else {
+                    mPaint.setMaskFilter(null);
+                }
+                break;
+            case R.id.android_sheid:
+                mPaint.setShader(new RadialGradient(8f, 80f, 90f, mPaint.getColor(),Color.WHITE, Shader.TileMode.MIRROR));
+                break;
+     
+            }  
+    }
 	
 	OnClickListener onChangeColorClick = new OnClickListener() {
 	    @Override
