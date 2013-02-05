@@ -6,5 +6,9 @@
         <item>"Веселая математика"</item>
         <item>"Ориентирование"</item>
     </string-array>
-    
+    <string-array name="SelectLetters">
+        <item>"Рисование"</item>
+        <item>"Раскраски"</item>
+        <item>"Магические раскраски"</item>
+    </string-array>
 </resources>

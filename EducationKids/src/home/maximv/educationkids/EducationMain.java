@@ -67,7 +67,7 @@ public class EducationMain extends Activity {
         login = (EditText) findViewById(R.id.nameKids);
 
         String name = sPref.getString(login.getText().toString(), "");
-        if (name == "") {
+        if (name != "") {
             Toast.makeText(this, name+", вы успешно вошли в систему! ", Toast.LENGTH_SHORT).show();
             successRegistration();
         }else {
@@ -90,7 +90,6 @@ public class EducationMain extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == SpeechRecognition.VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
-            // Fill the list view with the strings the recognizer thought it could have heard
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             String resString = "";
             for (String s : matches)

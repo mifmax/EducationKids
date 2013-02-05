@@ -3,7 +3,7 @@ package home.maximv.educationkids;
 import home.maximv.courses.MerryMathematics;
 import home.maximv.courses.Orientation;
 import home.maximv.courses.Seasons;
-import home.maximv.courses.magicletter.MagicLetter;
+import home.maximv.courses.magicletter.SelectMagicLetter;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import android.widget.ArrayAdapter;
 public class EducationSelect extends ListActivity{
     private ArrayAdapter<String> adapter;
     private String[] courses;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +34,11 @@ public class EducationSelect extends ListActivity{
                 selectItem(v,position);
             }
     };
-        
+
     public void selectItem(View v,int position) {
-        
+
         if (position==adapter.getPosition(courses[0])){
-            Intent intent = new Intent(this, MagicLetter.class);
+            Intent intent = new Intent(this, SelectMagicLetter.class);
             startActivity(intent);
         }
         if (position==adapter.getPosition(courses[1])){

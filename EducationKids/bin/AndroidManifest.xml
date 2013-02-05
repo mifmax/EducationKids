@@ -32,6 +32,7 @@
                 <activity android:name="home.maximv.courses.Orientation"></activity>
                 <activity android:name="home.maximv.courses.Seasons"></activity>
                 <activity android:name="home.maximv.utils.ColorSelectDialog"></activity>
+                <activity android:name="home.maximv.courses.magicletter.SelectMagicLetter"></activity>
         
     </application>
 
