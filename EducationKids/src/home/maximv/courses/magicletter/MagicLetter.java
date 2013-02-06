@@ -51,8 +51,11 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         selectMenu = getIntent().getIntExtra("SelectLetters", 0);
+
+        if (selectMenu!=2){
+       
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.color_panel);
         Draw draw = (Draw) findViewById(R.id.draw);
         mPaint = draw.mPaint;
@@ -67,10 +70,13 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
 
         mEmboss = new EmbossMaskFilter(new float[] { 1, 1, 1 }, 0.4f, 6, 3.5f);
         mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL);
+        }else{
+            setContentView(R.layout.fayrypicture);
+        }
     }
 
     public void onPenClick(View v) {
-        mPaint.setXfermode(null);
+      //  mPaint.setXfermode(null);
         mPaint.setAlpha(0xFF);
 
         switch (v.getId()) {

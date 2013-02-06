@@ -70,8 +70,21 @@ public final class R {
         public static final int sheid=0x7f020027;
         public static final int simple=0x7f020028;
         public static final int size=0x7f020029;
-        public static final int splash=0x7f02002a;
-        public static final int splash_xhdpi=0x7f02002b;
+        public static final int sl1=0x7f02002a;
+        public static final int sl10=0x7f02002b;
+        public static final int sl11=0x7f02002c;
+        public static final int sl12=0x7f02002d;
+        public static final int sl1_color=0x7f02002e;
+        public static final int sl2=0x7f02002f;
+        public static final int sl3=0x7f020030;
+        public static final int sl4=0x7f020031;
+        public static final int sl5=0x7f020032;
+        public static final int sl6=0x7f020033;
+        public static final int sl7=0x7f020034;
+        public static final int sl8=0x7f020035;
+        public static final int sl9=0x7f020036;
+        public static final int splash=0x7f020037;
+        public static final int splash_xhdpi=0x7f020038;
     }
     public static final class id {
         public static final int COLOR_MENU=0x7f0b0021;
@@ -116,7 +129,7 @@ public final class R {
         public static final int color_panel=0x7f030001;
         public static final int education_main=0x7f030002;
         public static final int education_select=0x7f030003;
-        public static final int erase_layout=0x7f030004;
+        public static final int fayrypicture=0x7f030004;
         public static final int itemcolorselect=0x7f030005;
         public static final int main=0x7f030006;
         public static final int selectcolor=0x7f030007;

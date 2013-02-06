@@ -45,7 +45,7 @@ public class EducationMain extends Activity {
         speakButton.setEnabled(false);
         speakButton.setImageResource(R.drawable.mic_off);
         }
-        new SpeechToText("Здравствуйте, представьтесь пожалуйста!").start();
+      //  new SpeechToText("Здравствуйте, представьтесь пожалуйста!").start();
     }
 
     @Override
