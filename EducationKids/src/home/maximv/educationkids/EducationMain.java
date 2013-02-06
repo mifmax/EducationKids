@@ -85,15 +85,23 @@ public class EducationMain extends Activity {
 
         // База нам нужна для записи и чтения
         sqdb = sqh.getWritableDatabase();
+        
+        
         ContentValues values = new ContentValues();
-        values.put(DbService.FIRST_NAME, "Maksim");
+        values.put(DbService.FIRST_NAME, "Максим");
         values.put(DbService.MIDDLE_NAME, "I");
-        values.put(DbService.LAST_NAME, "Verakhouski");
+       values.put(DbService.LAST_NAME, "Verakhouski");
 
         // вызываем метод вставки
         sqdb.insert(DbService.TABLE_NAME, DbService.FIRST_NAME, values);
-        Cursor cursor = sqdb.rawQuery("select "+ DbService.FIRST_NAME +" from "+ DbService.TABLE_NAME, null);
-        //Log.i("INFO",cursor.getString(1));
+        Cursor cursor = sqdb.rawQuery("select * from learner", null);
+        while (cursor.moveToNext()) {
+            // GET COLUMN INDICES + VALUES OF THOSE COLUMNS
+            int id = cursor.getInt(cursor.getColumnIndex(DbService.UID));
+            String name1 = cursor.getString(cursor
+                    .getColumnIndex(DbService.FIRST_NAME));
+            Log.i("LOG_TAG", "ROW " + id + " HAS NAME " + name1);
+        }
         cursor.close();
         DbService.closeCon(sqh, sqdb);
     }
