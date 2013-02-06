@@ -282,8 +282,6 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             if (showToast)
                 Toast.makeText(getApplicationContext(), "Saved your creation to " + file.getAbsolutePath(),
                         Toast.LENGTH_LONG).show();
-            // sending a broadcast to the media scanner so it will scan the new
-            // screenshot.
             Intent requestScan = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
             requestScan.setData(Uri.fromFile(file));
             sendBroadcast(requestScan);

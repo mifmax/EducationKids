@@ -54,9 +54,11 @@ public class Draw extends View {
             DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
             widthDisplay = displaymetrics.widthPixels;
             heightDisplay = widthDisplay/mBitmap.getWidth()>1?mBitmap.getWidth()*widthDisplay/mBitmap.getWidth():mBitmap.getWidth()*mBitmap.getWidth()/widthDisplay;
-            mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay,heightDisplay+30, false);
+            mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay,heightDisplay+95, false);
             break;
         case 2:
+            break;
+        case 3:
             break;
         default:
             break;

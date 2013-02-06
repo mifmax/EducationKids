@@ -1,6 +1,5 @@
 package home.maximv.courses.magicletter;
 
-import home.maximv.courses.MerryMathematics;
 import home.maximv.educationkids.R;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -45,8 +44,13 @@ public class SelectMagicLetter extends ListActivity{
         }
 
         if (position==adapter.getPosition(SelectLetters[2])){
-            Intent intent = new Intent(this, MerryMathematics.class);
+            Intent intent = new Intent(this, MagicLetter.class);
             intent.putExtra("SelectLetters", 2);
+            startActivity(intent);
+        }
+        if (position==adapter.getPosition(SelectLetters[3])){
+            Intent intent = new Intent(this, MagicLetter.class);
+            intent.putExtra("SelectLetters", 3);
             startActivity(intent);
         }
 
