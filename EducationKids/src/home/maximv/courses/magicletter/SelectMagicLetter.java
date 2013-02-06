@@ -32,21 +32,23 @@ public class SelectMagicLetter extends ListActivity{
     };
 
     public void selectItem(View v,int position) {
-
         if (position==adapter.getPosition(SelectLetters[0])){
             Intent intent = new Intent(this, MagicLetter.class);
             intent.putExtra("SelectLetters", 0);
             startActivity(intent);
         }
+
         if (position==adapter.getPosition(SelectLetters[1])){
             Intent intent = new Intent(this, MagicLetter.class);
             intent.putExtra("SelectLetters", 1);
             startActivity(intent);
         }
+
         if (position==adapter.getPosition(SelectLetters[2])){
             Intent intent = new Intent(this, MerryMathematics.class);
             intent.putExtra("SelectLetters", 2);
             startActivity(intent);
         }
+
     }
 }

@@ -1,36 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/COLOR_MENU_ID"
+        android:id="@+id/COLOR_MENU"
         android:icon="@drawable/color"
         android:title="@string/COLOR_MENU_ID"/>
-    <item
-        android:id="@+id/EMBOSS_MENU_ID"
-        android:icon="@drawable/emboss"
-        android:title="@string/EMBOSS_MENU_ID"/>
-    <item
-        android:id="@+id/BLUR_MENU_ID"
-        android:icon="@drawable/blur"
-        android:title="@string/BLUR_MENU_ID"/>
-    <item
-        android:id="@+id/SIZE_MENU_ID"
-        android:icon="@drawable/size"
-        android:title="@string/SIZE_MENU_ID"/>
-    <item
-        android:id="@+id/ERASE_MENU_ID"
-        android:icon="@drawable/erase"
-        android:title="@string/ERASE_MENU_ID"/>
-    <item
-        android:id="@+id/CLEAR_ALL"
-        android:icon="@drawable/clear_all"
-        android:title="@string/CLEAR_ALL"/>
+
     <item
         android:id="@+id/SAVE"
         android:icon="@drawable/save"
         android:title="@string/SAVE"/>
+
     <item
         android:id="@+id/SHARE"
         android:icon="@drawable/share"
         android:title="@string/SHARE"/>
-              
+
 </menu>

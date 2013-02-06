@@ -118,7 +118,7 @@
             android:contentDescription="@string/description"
             android:onClick="onPenClick"
             android:src="@drawable/clear_all" />
- <ImageView
+ 		<ImageView
             android:id="@+id/android:reveal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

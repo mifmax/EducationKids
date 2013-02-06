@@ -17,13 +17,7 @@
      <string name="description">Кнопка панели инструментов</string>
     
     <string name="COLOR_MENU_ID">Цвет</string>
-    <string name="EMBOSS_MENU_ID">Основной режим рисования</string>
-    <string name="BLUR_MENU_ID">Режим рисования с размытием</string>
-    <string name="SIZE_MENU_ID">Размер кисти</string>
-    <string name="ERASE_MENU_ID">Ластик</string>
-    <string name="CLEAR_ALL">Очистить все</string>
     <string name="SAVE">Сохранить</string>
-    <string name="SHARE">Послать в ММС</string>
-    <string name="ABOUT">Об авторе</string>
+    <string name="SHARE">Послать ММС</string>
           
 </resources>

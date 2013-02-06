@@ -2,6 +2,7 @@ package home.maximv.courses.magicletter;
 
 import home.maximv.educationkids.R;
 import home.maximv.utils.ColorPickerDialog;
+import home.maximv.utils.Places;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -118,11 +119,13 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             mPaint.setShader(null);
             mPaint.setXfermode(new PorterDuffXfermode(Mode.LIGHTEN));
             break;
+
         case R.id.android_erase:
             mPaint.setMaskFilter(null);
             mPaint.setShader(null);
              mPaint.setColor(Color.WHITE);
             break;
+
         case R.id.android_blur:
             mPaint.setShader(null);
             if (mPaint.getMaskFilter() != mBlur) {
@@ -180,45 +183,14 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
         mPaint.setAlpha(0xFF);
 
         switch (item.getItemId()) {
-        case R.id.COLOR_MENU_ID:
+        case R.id.COLOR_MENU:
             new ColorPickerDialog(this, this, mPaint.getColor()).show();
             return true;
 
-        case R.id.EMBOSS_MENU_ID:
-            if (mPaint.getMaskFilter() != mEmboss) {
-                mPaint.setMaskFilter(mEmboss);
-            } else {
-                mPaint.setMaskFilter(null);
-            }
-            return true;
-
-        case R.id.BLUR_MENU_ID:
-            if (mPaint.getMaskFilter() != mBlur) {
-                mPaint.setMaskFilter(mBlur);
-            } else {
-                mPaint.setMaskFilter(null);
-            }
-            return true;
-
-        case R.id.SIZE_MENU_ID:
-            size();
-            return true;
-
-        case R.id.ERASE_MENU_ID:
-            mPaint.setMaskFilter(null);
-            mPaint.setXfermode(new PorterDuffXfermode(Mode.CLEAR));
-            return true;
-        case R.id.CLEAR_ALL:
-            Intent intent = getIntent();
-            overridePendingTransition(0, 0);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            finish();
-            overridePendingTransition(0, 0);
-            startActivity(intent);
-            return true;
         case R.id.SAVE:
             takeScreenshot(true);
             break;
+
         case R.id.SHARE:
             File screenshotPath = takeScreenshot(false);
             Intent i = new Intent();
