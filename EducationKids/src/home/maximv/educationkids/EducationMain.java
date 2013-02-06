@@ -1,16 +1,21 @@
 package home.maximv.educationkids;
 
+import home.maximv.dbservices.DbService;
+import home.maximv.utils.SpeechRecognition;
 import home.maximv.utils.SpeechToText;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.util.Log;
@@ -19,12 +24,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import home.maximv.utils.SpeechRecognition;
 
 public class EducationMain extends Activity {
     
     private SharedPreferences sPref;
     private EditText login;
+    DbService sqh;
+    SQLiteDatabase sqdb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,17 +79,35 @@ public class EducationMain extends Activity {
         }else {
             Toast.makeText(this, "Ваше имя не найдено в базе данных", Toast.LENGTH_SHORT).show();
         }
+
+        // Инициализируем наш класс-обёртку
+        sqh = new DbService(this);
+
+        // База нам нужна для записи и чтения
+        sqdb = sqh.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DbService.FIRST_NAME, "Maksim");
+        values.put(DbService.MIDDLE_NAME, "I");
+        values.put(DbService.LAST_NAME, "Verakhouski");
+
+        // вызываем метод вставки
+        sqdb.insert(DbService.TABLE_NAME, DbService.FIRST_NAME, values);
+        Cursor cursor = sqdb.rawQuery("select "+ DbService.FIRST_NAME +" from "+ DbService.TABLE_NAME, null);
+        //Log.i("INFO",cursor.getString(1));
+        cursor.close();
+        DbService.closeCon(sqh, sqdb);
     }
+
     public void successRegistration() {
         Intent intent = new Intent(this, EducationSelect.class);
         startActivity(intent);
-
     }
-    
+
     public void recognize(View v) {
     	SpeechRecognition.run(this);
             //new Voice().recognize(v);
     }
+
     /**
      * Handle the results from the recognition activity.
      */
