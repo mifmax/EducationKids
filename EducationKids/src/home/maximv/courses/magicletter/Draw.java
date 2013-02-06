@@ -21,9 +21,10 @@ public class Draw extends View {
     private Canvas mCanvas;
     private Path mPath;
     private Paint mBitmapPaint;
-    protected Paint mPaint;
     private int widthDisplay;
     private int heightDisplay;
+    protected Paint mPaint;
+    protected int selectMenu;
 
     private float mX, mY;
     private static final float TOUCH_TOLERANCE = 4;
@@ -39,21 +40,27 @@ public class Draw extends View {
     public Draw(Context context) {
         super(context);
     }
-   /* public Draw(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		 mPaint = new Paint();
-	        mBitmap = Bitmap.createBitmap(1024, 1024, Bitmap.Config.ARGB_8888);
-	}
-*/
+
 	public Draw(Context context, AttributeSet attrs) {
 		super(context, attrs);
+
         mPaint = new Paint();
-        mBitmap = Bitmap.createBitmap(1024, 1024, Bitmap.Config.ARGB_8888);
-        mBitmap = BitmapFactory.decodeResource(getResources(), ml_pics[generateRandom(ml_pics.length)]);
-        DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
-        widthDisplay = displaymetrics.widthPixels;
-        heightDisplay = widthDisplay/mBitmap.getWidth()>1?mBitmap.getWidth()*widthDisplay/mBitmap.getWidth():mBitmap.getWidth()*mBitmap.getWidth()/widthDisplay;
-        mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay,heightDisplay+30, false);
+        switch (MagicLetter.selectMenu) {
+        case 0:
+            mBitmap = Bitmap.createBitmap(1024, 1024, Bitmap.Config.ARGB_8888);
+            break;
+        case 1:
+            mBitmap = BitmapFactory.decodeResource(getResources(), ml_pics[generateRandom(ml_pics.length)]);
+            DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
+            widthDisplay = displaymetrics.widthPixels;
+            heightDisplay = widthDisplay/mBitmap.getWidth()>1?mBitmap.getWidth()*widthDisplay/mBitmap.getWidth():mBitmap.getWidth()*mBitmap.getWidth()/widthDisplay;
+            mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay,heightDisplay+30, false);
+            break;
+        case 2:
+            break;
+        default:
+            break;
+        }
         mCanvas = new Canvas(mBitmap);
         mPath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
@@ -66,7 +73,7 @@ public class Draw extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-      //  canvas.drawColor(0xFFFFFFFF);
+        canvas.drawColor(0xFFFFFFFF);
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
         canvas.drawPath(mPath, mPaint);
     }

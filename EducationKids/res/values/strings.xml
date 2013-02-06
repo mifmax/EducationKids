@@ -14,6 +14,7 @@
     <string name="share_text_template"></string>
     <string name="toolbox_share_title">Share</string>
     <string name="no_way_to_share">Can locate an app to share with &#8230;</string>
+     <string name="description">Кнопка панели инструментов</string>
     
     <string name="COLOR_MENU_ID">Цвет</string>
     <string name="EMBOSS_MENU_ID">Основной режим рисования</string>

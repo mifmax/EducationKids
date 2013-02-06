@@ -32,9 +32,5 @@
         android:id="@+id/SHARE"
         android:icon="@drawable/share"
         android:title="@string/SHARE"/>
-    <item
-        android:id="@+id/ABOUT"
-        android:icon="@drawable/about"
-        android:title="@string/ABOUT"/>
               
 </menu>
