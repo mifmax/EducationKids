@@ -1,6 +1,10 @@
 package home.maximv.courses.magicletter;
 
 import home.maximv.educationkids.R;
+
+import java.util.Calendar;
+import java.util.Date;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,6 +28,9 @@ public class EraseLayout extends View {
     private Canvas mCanvas;
     private Paint mBitmapPaint;
     public View backgr;
+    Date date = new Date();
+    Calendar calendar = Calendar.getInstance();
+   
     private int sl_pics [] = {R.drawable.sl1, R.drawable.sl2,R.drawable.sl3, R.drawable.sl4,R.drawable.sl5, R.drawable.sl6,R.drawable.sl7, R.drawable.sl8};
     private int sl_pics_color [] = {R.drawable.sl1_color, R.drawable.sl2_color,R.drawable.sl3_color, R.drawable.sl4_color,R.drawable.sl5_color, R.drawable.sl6_color,R.drawable.sl7_color, R.drawable.sl8_color};
 
@@ -84,7 +91,20 @@ public class EraseLayout extends View {
 	                }
 	                   if (event.getAction() == MotionEvent.ACTION_UP) {
 	                       if (transparent()){
+	                           Calendar cal = Calendar.getInstance();
 	                           Toast.makeText(getContext(), "Поздравляю, ты молодец!!!", Toast.LENGTH_SHORT).show();
+	                           Long sec = (cal.getTimeInMillis()-calendar.getTimeInMillis())*100;
+	                           switch (sec.intValue()) {
+                            case 0: case 1: case 2: case 3: case 4: case 5:
+                                sec=5l;
+                                break;
+                            case 6: case 7: case 8: case 9: case 10: case 11:
+                                sec=4l;
+                            default:
+                                sec=3l;
+                                break;
+                            }
+	                         
 	                           postDelayed(setBitMap, 2000);
 	                       }
 	                   }

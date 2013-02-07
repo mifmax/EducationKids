@@ -1,6 +1,6 @@
 package home.maximv.educationkids;
 
-import home.maximv.dbservices.DbService;
+import home.maximv.db.service.DbService;
 import home.maximv.utils.SpeechRecognition;
 
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class EducationMain extends Activity {
         sqdb = sqh.getWritableDatabase();
         
         
-        ContentValues values = new ContentValues();
+        /*ContentValues values = new ContentValues();
         values.put(DbService.FIRST_NAME, "Максим");
         values.put(DbService.MIDDLE_NAME, "I");
        values.put(DbService.LAST_NAME, "Verakhouski");
@@ -102,7 +102,7 @@ public class EducationMain extends Activity {
             Log.i("LOG_TAG", "ROW " + id + " HAS NAME " + name1);
         }
         cursor.close();
-        DbService.closeCon(sqh, sqdb);
+        DbService.closeCon(sqh, sqdb);*/
     }
 
     public void successRegistration() {
