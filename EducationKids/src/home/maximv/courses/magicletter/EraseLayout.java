@@ -24,15 +24,16 @@ public class EraseLayout extends View {
     private final static int PAINT_WIDTH = 24;
     private Paint mPaint;
     private Bitmap mBitmap;
-    private int count=7;
+    private int count=11;
     private Canvas mCanvas;
     private Paint mBitmapPaint;
     public View backgr;
     Date date = new Date();
     Calendar calendar = Calendar.getInstance();
    
-    private int sl_pics [] = {R.drawable.sl1, R.drawable.sl2,R.drawable.sl3, R.drawable.sl4,R.drawable.sl5, R.drawable.sl6,R.drawable.sl7, R.drawable.sl8};
-    private int sl_pics_color [] = {R.drawable.sl1_color, R.drawable.sl2_color,R.drawable.sl3_color, R.drawable.sl4_color,R.drawable.sl5_color, R.drawable.sl6_color,R.drawable.sl7_color, R.drawable.sl8_color};
+    private int sl_pics [] = {R.drawable.sl1, R.drawable.sl2,R.drawable.sl3, R.drawable.sl4,R.drawable.sl5, R.drawable.sl6,R.drawable.sl7, R.drawable.sl8,R.drawable.sl9,R.drawable.sl10, R.drawable.sl11};
+    private int sl_pics_color [] = {R.drawable.sl1_color, R.drawable.sl2_color,R.drawable.sl3_color, R.drawable.sl4_color,R.drawable.sl5_color, R.drawable.sl6_color,R.drawable.sl7_color, R.drawable.sl8_color,
+    		R.drawable.sl9_color, R.drawable.sl10_color,R.drawable.sl11_color};
 
 	        public EraseLayout(Context context, AttributeSet attrs, int defStyle) {
 	                super(context, attrs, defStyle);
@@ -93,7 +94,7 @@ public class EraseLayout extends View {
 	                       if (transparent()){
 	                           Calendar cal = Calendar.getInstance();
 	                           Toast.makeText(getContext(), "Поздравляю, ты молодец!!!", Toast.LENGTH_SHORT).show();
-	                           Long sec = (cal.getTimeInMillis()-calendar.getTimeInMillis())*100;
+	                           /* Long sec = (cal.getTimeInMillis()-calendar.getTimeInMillis())*100;
 	                           switch (sec.intValue()) {
                             case 0: case 1: case 2: case 3: case 4: case 5:
                                 sec=5l;
@@ -105,7 +106,8 @@ public class EraseLayout extends View {
                                 break;
                             }
 	                         
-	                           postDelayed(setBitMap, 2000);
+	                           postDelayed(setBitMap, 2000);*/
+	                    	   setBitMap();
 	                       }
 	                   }
 	                mX = x;
@@ -129,7 +131,7 @@ public class EraseLayout extends View {
 	                    }
 	                }
 	            }
-                if (count<3) return true;
+                if (count<6) return true;
                 else return false;
 	            //	        boolean transparent = (color & 0xff000000) == 0x0;
 	        }

@@ -1,6 +1,5 @@
 package home.maximv.educationkids;
 
-import home.maximv.db.service.DbJournalService;
 import home.maximv.db.service.DbLearnerService;
 import home.maximv.db.service.DbService;
 import home.maximv.db.vo.Learner;
@@ -30,9 +29,7 @@ public class EducationMain extends Activity {
     private SharedPreferences sPref;
     private EditText login;
     DbService sqh;
-    DbLearnerService sqh1;
-    DbJournalService sqh2;
-    SQLiteDatabase sqdb,sqdb1,sqdb2;
+    SQLiteDatabase sqdb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +70,13 @@ public class EducationMain extends Activity {
     public void registration(View v) {
         DbLearnerService lernerService = new DbLearnerService(this); 
         login = (EditText) findViewById(R.id.nameKids);
-        Learner lerner = lernerService.getLearner(login.getText().toString(), this);
-        if (lerner.getLogin()!=null) {
-            Toast.makeText(this, lerner.getFirstName()+", вы успешно вошли в систему! ", Toast.LENGTH_SHORT).show();
+      /*  Learner learner = new Learner();
+        learner.setFirstName("Максим");
+        learner.setLogin("maximv");
+        lernerService.setlearner(learner, this);*/
+        Learner learner = lernerService.getLearner(login.getText().toString(), this);
+        if (learner.getLogin()!=null) {
+            Toast.makeText(this, learner.getFirstName()+", вы успешно вошли в систему! ", Toast.LENGTH_SHORT).show();
             successRegistration();
         }else {
             Toast.makeText(this, "Ваше имя не найдено в базе данных,зарегистрируйтесь пожалуйста!", Toast.LENGTH_SHORT).show();
