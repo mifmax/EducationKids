@@ -12,16 +12,20 @@ import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public class EraseLayout extends View {
 
 	private float mX, mY;
-    private final static int COATING_COLOR = Color.DKGRAY;
     private final static int PAINT_WIDTH = 24;
     private Paint mPaint;
     private Bitmap mBitmap;
+    private int count=7;
     private Canvas mCanvas;
     private Paint mBitmapPaint;
+    public View backgr;
+    private int sl_pics [] = {R.drawable.sl1, R.drawable.sl2,R.drawable.sl3, R.drawable.sl4,R.drawable.sl5, R.drawable.sl6,R.drawable.sl7, R.drawable.sl8};
+    private int sl_pics_color [] = {R.drawable.sl1_color, R.drawable.sl2_color,R.drawable.sl3_color, R.drawable.sl4_color,R.drawable.sl5_color, R.drawable.sl6_color,R.drawable.sl7_color, R.drawable.sl8_color};
 
 	        public EraseLayout(Context context, AttributeSet attrs, int defStyle) {
 	                super(context, attrs, defStyle);
@@ -39,9 +43,7 @@ public class EraseLayout extends View {
 	        }
 
 	        private void initialise() {
-
 	                mBitmapPaint = new Paint(Paint.DITHER_FLAG);
-;
 	                mPaint = new Paint();
 	                mPaint.setStyle(Paint.Style.STROKE);
 	                mPaint.setStrokeJoin(Paint.Join.ROUND);
@@ -51,37 +53,24 @@ public class EraseLayout extends View {
 	        }
 
 	        private Bitmap getBitmap() {
-	                if (mBitmap == null) {
-	                	/*  	                    fos = new FileOutputStream(file);
-	                    Bitmap saveBitmap = Bitmap.createBitmap(mBitmap);
-	                    Canvas c = new Canvas(saveBitmap);
-	                    c.drawColor(0xFFFFFFFF);
-	                    c.drawBitmap(mBitmap,0,0,null);
-	                    saveBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-	                    saveBitmap.recycle();
-                      mBitmap = Bitmap.createBitmap(getMeasuredWidth(),
-                                getMeasuredHeight(), Bitmap.Config.ARGB_8888);
-*/
-//	                	mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sl1);
-
-                        mBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sl1).copy(Bitmap.Config.ARGB_8888, true);
-                        mBitmap=Bitmap.createScaledBitmap(mBitmap, getMeasuredWidth(),getMeasuredHeight(), false);
-
-                        mCanvas = new Canvas(mBitmap);
-
-                   //     mCanvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
-	                        //drawColor(c);
-                       // mBitmap.eraseColor(Color.TRANSPARENT);
-	                }
-	                return mBitmap;
+	            if (mBitmap == null) {
+	                setBitMap();
+	            }
+	            return mBitmap;
 	        }
 
+	        private void setBitMap(){
+	            if (count>sl_pics.length-1) count=0;
+                mBitmap = BitmapFactory.decodeResource(getResources(), sl_pics[count]).copy(Bitmap.Config.ARGB_8888, true);
+                backgr.setBackgroundResource(sl_pics_color[count]);
+                mBitmap=Bitmap.createScaledBitmap(mBitmap, getMeasuredWidth(),getMeasuredHeight(), false);
+                mCanvas = new Canvas(mBitmap);
+                count++;
+	        }
 	        @Override
 	        protected void onDraw(Canvas canvas) {
-               // canvas.drawColor(Color.WHITE, PorterDuff.Mode.CLEAR);
-	        	//canvas.drawBitmap(getBitmap(), 0, 0, mBitmapPaint);
-	        //	canvas.drawColor(0xFFFFFFFF);
-	        	canvas.drawBitmap(getBitmap(),0,0,null);
+               canvas.drawColor(Color.TRANSPARENT);
+	        	canvas.drawBitmap(getBitmap(),0,0,mBitmapPaint);
 	        }
 
 	        @Override
@@ -93,8 +82,35 @@ public class EraseLayout extends View {
 	                        mCanvas.drawLine(mX, mY, x, y, mPaint);
 	                        invalidate();
 	                }
+	                   if (event.getAction() == MotionEvent.ACTION_UP) {
+	                       if (transparent()){
+	                           Toast.makeText(getContext(), "Поздравляю, ты молодец!!!", Toast.LENGTH_SHORT).show();
+	                           postDelayed(setBitMap, 2000);
+	                       }
+	                   }
 	                mX = x;
 	                mY = y;
 	                return true;
+	        }
+            private Runnable setBitMap = new Runnable() {
+                public void run() {
+                    setBitMap();
+                }
+            };
+
+	        private boolean transparent(){
+	            int count=0;
+	            for(int x=0;x<getMeasuredWidth();){
+	                x=x+20;
+	                for(int y=0;y<getMeasuredHeight();){ 
+	                    y=y+20;
+	                    if(mBitmap.getPixel(x>=getMeasuredWidth()?getMeasuredWidth()-1:x, y>=getMeasuredHeight()?getMeasuredHeight()-1:y) != Color.TRANSPARENT){ 
+	                        count++;
+	                    }
+	                }
+	            }
+                if (count<3) return true;
+                else return false;
+	            //	        boolean transparent = (color & 0xff000000) == 0x0;
 	        }
 	}

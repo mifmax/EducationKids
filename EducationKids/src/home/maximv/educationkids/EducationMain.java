@@ -2,7 +2,6 @@ package home.maximv.educationkids;
 
 import home.maximv.dbservices.DbService;
 import home.maximv.utils.SpeechRecognition;
-import home.maximv.utils.SpeechToText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +112,6 @@ public class EducationMain extends Activity {
 
     public void recognize(View v) {
     	SpeechRecognition.run(this);
-            //new Voice().recognize(v);
     }
 
     /**

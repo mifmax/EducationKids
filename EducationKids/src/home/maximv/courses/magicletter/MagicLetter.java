@@ -45,7 +45,6 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
     private Paint mPaint;
 
     private MaskFilter mEmboss;
-
     private MaskFilter mBlur;
     protected static int selectMenu;
     @Override
@@ -72,6 +71,8 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
         mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL);
         }else{
             setContentView(R.layout.fayrypicture);
+            EraseLayout EL = (EraseLayout) findViewById(R.id.EraseLayout);
+            EL.backgr = findViewById(R.id.fairybackground);
         }
     }
 
