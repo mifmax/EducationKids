@@ -24,16 +24,18 @@ public class EraseLayout extends View {
     private final static int PAINT_WIDTH = 24;
     private Paint mPaint;
     private Bitmap mBitmap;
-    private int count=11;
+    private int count=14;
     private Canvas mCanvas;
     private Paint mBitmapPaint;
     public View backgr;
     Date date = new Date();
     Calendar calendar = Calendar.getInstance();
    
-    private int sl_pics [] = {R.drawable.sl1, R.drawable.sl2,R.drawable.sl3, R.drawable.sl4,R.drawable.sl5, R.drawable.sl6,R.drawable.sl7, R.drawable.sl8,R.drawable.sl9,R.drawable.sl10, R.drawable.sl11};
+    private int sl_pics [] = {R.drawable.sl1, R.drawable.sl2,R.drawable.sl3, R.drawable.sl4,R.drawable.sl5, R.drawable.sl6,R.drawable.sl7, R.drawable.sl8,R.drawable.sl9,R.drawable.sl10, R.drawable.sl11,
+    		R.drawable.sl12,R.drawable.sl13, R.drawable.sl14,R.drawable.sl15, R.drawable.sl16,R.drawable.sl17, R.drawable.sl18,R.drawable.sl19,R.drawable.sl20};
     private int sl_pics_color [] = {R.drawable.sl1_color, R.drawable.sl2_color,R.drawable.sl3_color, R.drawable.sl4_color,R.drawable.sl5_color, R.drawable.sl6_color,R.drawable.sl7_color, R.drawable.sl8_color,
-    		R.drawable.sl9_color, R.drawable.sl10_color,R.drawable.sl11_color};
+    		R.drawable.sl9_color, R.drawable.sl10_color,R.drawable.sl11_color,R.drawable.sl12_color, R.drawable.sl13_color,R.drawable.sl14_color, R.drawable.sl15_color,R.drawable.sl16_color, R.drawable.sl17_color, 
+    		R.drawable.sl18_color,	R.drawable.sl19_color, R.drawable.sl20_color};
 
 	        public EraseLayout(Context context, AttributeSet attrs, int defStyle) {
 	                super(context, attrs, defStyle);
