@@ -9,13 +9,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.BaseColumns;
-import android.util.Log;
 
-public class DbLearnerService extends SQLiteOpenHelper  implements BaseColumns{
-    private static final String DATABASE_NAME = "educationkids.db";
-    private static final int DATABASE_VERSION = 1;
+public class DbLearnerService {
     public static final String TABLE_NAME = "learner";
     public static final String UID = "_id";
     public static final String FIRST_NAME = "first_name";
@@ -30,40 +25,19 @@ public class DbLearnerService extends SQLiteOpenHelper  implements BaseColumns{
             + TABLE_NAME + " (" + UID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + FIRST_NAME + " VARCHAR(255), " + MIDDLE_NAME + " VARCHAR(255), " 
             + LAST_NAME  + " VARCHAR(255), " + LOGIN       + " VARCHAR(255), " 
-            + BORN_YEAR  + " DATE(255),    " + EMAIL       + " VARCHAR(255), "
-            + PHONE_NUM  + " VARCHAR(255), " + SEX         + " BYTE()       )";
+            + BORN_YEAR  + " DATE,    " + EMAIL       + " VARCHAR(255), "
+            + PHONE_NUM  + " VARCHAR(255), " + SEX         + " BYTE       )";
 
-    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS "
+    protected static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS "
             + TABLE_NAME;
 
     public DbLearnerService(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);    }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_CREATE_ENTRIES);
+        super();    
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.w("LOG_TAG", "Обновление базы данных с версии " + oldVersion
-                + " до версии " + newVersion + ", которое удалит все старые данные");
-        // Удаляем предыдущую таблицу при апгрейде
-        db.execSQL(SQL_DELETE_ENTRIES);
-        // Создаём новый экземпляр таблицы
-        onCreate(db);
-
-    }
-    public static void closeCon(DbService sqh, SQLiteDatabase sqdb){
-        // закрываем соединения с базой данных
-        sqdb.close();
-        sqh.close();
-    }
-
-        // Adding new learner
-        void addlearner(Learner learner) {
-            SQLiteDatabase db = this.getWritableDatabase();
-     
+          // Adding new learner
+    public void setlearner(Learner learner,Context context) {
+            SQLiteDatabase db = new DbService(context).getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put(FIRST_NAME, learner.getFirstName());
             values.put(MIDDLE_NAME, learner.getMiddleName());
@@ -80,8 +54,8 @@ public class DbLearnerService extends SQLiteOpenHelper  implements BaseColumns{
         }
      
         // Getting single learner
-        Learner getLearner(int id) {
-            SQLiteDatabase db = this.getReadableDatabase();
+    public Learner getLearner(int id,Context context) {
+            SQLiteDatabase db = new DbService(context).getReadableDatabase();
      
             Cursor cursor = db.query(TABLE_NAME, new String[] { UID,
                     FIRST_NAME, MIDDLE_NAME,LAST_NAME,LOGIN,BORN_YEAR,EMAIL,PHONE_NUM,SEX}, UID + "=?",
@@ -92,17 +66,39 @@ public class DbLearnerService extends SQLiteOpenHelper  implements BaseColumns{
             Learner learner = new Learner(Integer.parseInt(cursor.getString(0)),
                     cursor.getString(1), cursor.getString(2),cursor.getString(3),
                     cursor.getString(4), cursor.getString(5),cursor.getString(6),
-                    cursor.getString(7));
+                    cursor.getString(7),cursor.getString(8));
+            db.close();
             return learner;
         }
-     
+  
+    // Getting single learner
+public Learner getLearner(String login,Context context) {
+        SQLiteDatabase db = new DbService(context).getReadableDatabase();
+ 
+        Cursor cursor = db.query(TABLE_NAME, new String[] { UID,
+                FIRST_NAME, MIDDLE_NAME,LAST_NAME,PHONE_NUM,LOGIN,BORN_YEAR,EMAIL,SEX}, LOGIN + "=?",
+                new String[] { String.valueOf(login) }, null, null, null, null);
+        Learner learner = new Learner();
+        if (cursor.getCount()!=0){
+            cursor.moveToFirst();
+ 
+        learner = new Learner(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2),cursor.getString(3),
+                cursor.getString(4), cursor.getString(5),cursor.getString(6),
+                cursor.getString(7),cursor.getString(8));
+        }
+        db.close();
+        
+        return learner;
+    }
+
         // Getting All learners
-        public List<Learner> getAllLearners() {
+        public List<Learner> getAllLearners(Context context) {
             List<Learner> learnerList = new ArrayList<Learner>();
             // Select All Query
             String selectQuery = "SELECT  * FROM " + TABLE_NAME;
      
-            SQLiteDatabase db = this.getWritableDatabase();
+            SQLiteDatabase db = new DbService(context).getWritableDatabase();
             Cursor cursor = db.rawQuery(selectQuery, null);
      
             // looping through all rows and adding to list
@@ -124,13 +120,13 @@ public class DbLearnerService extends SQLiteOpenHelper  implements BaseColumns{
                 } while (cursor.moveToNext());
             }
      
-            // return learner list
+            db.close();
             return learnerList;
         }
      
         // Updating single learner
-        public int updateContact(Learner learner) {
-            SQLiteDatabase db = this.getWritableDatabase();
+        public int updateContact(Learner learner,Context context) {
+            SQLiteDatabase db = new DbService(context).getWritableDatabase();
      
             ContentValues values = new ContentValues();
             values.put(FIRST_NAME, learner.getFirstName());
@@ -141,28 +137,28 @@ public class DbLearnerService extends SQLiteOpenHelper  implements BaseColumns{
             values.put(EMAIL, learner.getEmail());
             values.put(PHONE_NUM, learner.getPhoneNumber());
             values.put(SEX, learner.getSex());
-     
-            // updating row
-            return db.update(TABLE_NAME, values, UID + " = ?",
+            int result = db.update(TABLE_NAME, values, UID + " = ?",
                     new String[] { String.valueOf(learner.getPid()) });
+            db.close();
+            return result;
         }
      
         // Deleting single learner
-        public void deleteContact(Learner learner) {
-            SQLiteDatabase db = this.getWritableDatabase();
+        public void deleteLerner(Learner learner,Context context) {
+            SQLiteDatabase db = new DbService(context).getWritableDatabase();
             db.delete(TABLE_NAME, UID + " = ?",
                     new String[] { String.valueOf(learner.getPid()) });
             db.close();
         }
      
         // Getting learners Count
-        public int getLearnersCount() {
+        public int getLearnersCount(Context context) {
             String countQuery = "SELECT  * FROM " + TABLE_NAME;
-            SQLiteDatabase db = this.getReadableDatabase();
+            SQLiteDatabase db = new DbService(context).getReadableDatabase();
             Cursor cursor = db.rawQuery(countQuery, null);
             cursor.close();
      
-            // return count
+            db.close();
             return cursor.getCount();
         }
      

@@ -2,102 +2,109 @@ package home.maximv.db.vo;
 
 public class Learner {
 
-    public Learner(int parseInt, String string, String string2, String string3, String string4, String string5, String string6, String string7) {
-        // TODO Auto-generated constructor stub
+    public Learner(int pid, String firstName, String middleName, String lastName, String phoneNumber, String login, String bornYear, String email,String sex) {
+        super();
+        this.pid=pid;
+        this.firstName=firstName;
+        this.middleName=middleName;
+        this.lastName=lastName;
+        this.login=login;
+        this.bornYear=bornYear;
+        this.sex=sex;
+        this.phoneNumber=phoneNumber;
+        this.email=email;
     }
 
     public Learner() {
-        // TODO Auto-generated constructor stub
+        super();
+    }
+
+    private int pid;
+    
+    private String firstName;
+
+    private String middleName;
+
+    private String lastName;
+    
+    private String phoneNumber;
+    
+    private String login;
+    
+    private String bornYear;
+    
+    private String email;
+    
+    private String sex;
+
+    public int getPid() {
+        return this.pid;
     }
 
     public String getFirstName() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.firstName;
     }
-
-    public String getPhoneNumber() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
+    
     public String getMiddleName() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.middleName;
     }
-
     public String getLastName() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.lastName;
+    }
+    public String getPhoneNumber() {
+        return this.phoneNumber;
     }
 
     public String getLogin() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.login;
     }
 
     public String getBornYear() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.bornYear;
     }
 
     public String getEmail() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.email;
     }
 
     public String getSex() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.sex;
     }
 
-    public void setPid(int parseInt) {
-        // TODO Auto-generated method stub
-        
+    public void setPid(int pid) {
+        this.pid=pid;
     }
 
-    public void setFirstName(String string) {
-        // TODO Auto-generated method stub
-        
+    public void setFirstName(String firstname) {
+        this.firstName=firstname;
     }
 
-    public void setMiddleName(String string) {
-        // TODO Auto-generated method stub
-        
+    public void setMiddleName(String middleName) {
+        this.middleName=middleName;
     }
 
-    public void setLastName(String string) {
-        // TODO Auto-generated method stub
-        
+    public void setLastName(String lastName) {
+        this.lastName=lastName;
     }
 
-    public void setLogin(String string) {
-        // TODO Auto-generated method stub
-        
+    public void setLogin(String login) {
+        this.login=login;
     }
 
-    public void setBornYear(String string) {
-        // TODO Auto-generated method stub
-        
+    public void setBornYear(String bornYear) {
+        this.bornYear=bornYear;
     }
 
-    public void setSex(String string) {
-        // TODO Auto-generated method stub
-        
+    public void setSex(String sex) {
+        this.sex=sex;
     }
 
-    public void setPhoneNumber(String string) {
-        // TODO Auto-generated method stub
-        
+    public void setPhoneNumber(String phone) {
+        this.phoneNumber=phone;
     }
 
-    public void setEmail(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    public char[] getPid() {
-        // TODO Auto-generated method stub
-        return null;
+    public void setEmail(String email) {
+        this.email=email;
     }
 
 }

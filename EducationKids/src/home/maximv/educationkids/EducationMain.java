@@ -1,19 +1,20 @@
 package home.maximv.educationkids;
 
+import home.maximv.db.service.DbJournalService;
+import home.maximv.db.service.DbLearnerService;
 import home.maximv.db.service.DbService;
+import home.maximv.db.vo.Learner;
 import home.maximv.utils.SpeechRecognition;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -29,7 +30,9 @@ public class EducationMain extends Activity {
     private SharedPreferences sPref;
     private EditText login;
     DbService sqh;
-    SQLiteDatabase sqdb;
+    DbLearnerService sqh1;
+    DbJournalService sqh2;
+    SQLiteDatabase sqdb,sqdb1,sqdb2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,41 +71,15 @@ public class EducationMain extends Activity {
     }
 
     public void registration(View v) {
-        sPref = getSharedPreferences("logins",MODE_PRIVATE);
+        DbLearnerService lernerService = new DbLearnerService(this); 
         login = (EditText) findViewById(R.id.nameKids);
-
-        String name = sPref.getString(login.getText().toString(), "");
-        if (name != "") {
-            Toast.makeText(this, name+", вы успешно вошли в систему! ", Toast.LENGTH_SHORT).show();
+        Learner lerner = lernerService.getLearner(login.getText().toString(), this);
+        if (lerner.getLogin()!=null) {
+            Toast.makeText(this, lerner.getFirstName()+", вы успешно вошли в систему! ", Toast.LENGTH_SHORT).show();
             successRegistration();
         }else {
-            Toast.makeText(this, "Ваше имя не найдено в базе данных", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ваше имя не найдено в базе данных,зарегистрируйтесь пожалуйста!", Toast.LENGTH_SHORT).show();
         }
-
-        // Инициализируем наш класс-обёртку
-        sqh = new DbService(this);
-
-        // База нам нужна для записи и чтения
-        sqdb = sqh.getWritableDatabase();
-        
-        
-        /*ContentValues values = new ContentValues();
-        values.put(DbService.FIRST_NAME, "Максим");
-        values.put(DbService.MIDDLE_NAME, "I");
-       values.put(DbService.LAST_NAME, "Verakhouski");
-
-        // вызываем метод вставки
-        sqdb.insert(DbService.TABLE_NAME, DbService.FIRST_NAME, values);
-        Cursor cursor = sqdb.rawQuery("select * from learner", null);
-        while (cursor.moveToNext()) {
-            // GET COLUMN INDICES + VALUES OF THOSE COLUMNS
-            int id = cursor.getInt(cursor.getColumnIndex(DbService.UID));
-            String name1 = cursor.getString(cursor
-                    .getColumnIndex(DbService.FIRST_NAME));
-            Log.i("LOG_TAG", "ROW " + id + " HAS NAME " + name1);
-        }
-        cursor.close();
-        DbService.closeCon(sqh, sqdb);*/
     }
 
     public void successRegistration() {

@@ -1,167 +1,215 @@
 package home.maximv.db.vo;
 
-
 public class Journal {
 
-    public Journal(int parseInt, String string, String string2, String string3, String string4, String string5, String string6, String string7) {
-        // TODO Auto-generated constructor stub
-    }
-
     public Journal() {
-        // TODO Auto-generated constructor stub
+        super();
     }
 
-
-
-    public Journal(int parseInt, String string, String string2, String string3, String string4, String string5,
-            String string6, String string7, String string8, String string9, String string10, String string11,
-            String string12, String string13, String string14, String string15, String string16, String string17) {
-        // TODO Auto-generated constructor stub
+    public Journal(int pid, int learnerId, String date, int course1, int course2, int course3, int course4,
+            int course5, int course6, int course7, int course8, int course9, int course10, int course11, int course12,
+            int course13, int course14) {
+        super();
+        this.pid = pid;
+        this.lernerPid = learnerId;
+        this.date = date;
+        this.course1 = course1;
+        this.course2 = course2;
+        this.course3 = course3;
+        this.course4 = course4;
+        this.course5 = course5;
+        this.course6 = course6;
+        this.course7 = course7;
+        this.course8 = course8;
+        this.course9 = course9;
+        this.course10 = course10;
+        this.course11 = course11;
+        this.course12 = course12;
+        this.course13 = course13;
+        this.course14 = course14;
     }
 
-    public String getLearner() {
-        // TODO Auto-generated method stub
-        return null;
+    private int pid;
+
+    private Learner learner;
+
+    private int lernerPid;
+
+    private String date;
+
+    private int course1;
+
+    private int course2;
+
+    private int course3;
+
+    private int course4;
+
+    private int course5;
+
+    private int course6;
+
+    private int course7;
+
+    private int course8;
+
+    private int course9;
+
+    private int course10;
+
+    private int course11;
+
+    private int course12;
+
+    private int course13;
+
+    private int course14;
+
+    public Learner getLearner() {
+        return this.learner;
+    }
+
+    public int getLearnerId() {
+        return this.lernerPid;
+    }
+
+    public int getPid() {
+        return this.pid;
     }
 
     public String getDate() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.date;
     }
 
     public int getCourse1() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course1;
     }
+
     public int getCourse2() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course2;
     }
+
     public int getCourse3() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course3;
     }
+
     public int getCourse4() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course4;
     }
+
     public int getCourse5() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course5;
     }
+
     public int getCourse6() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course6;
     }
+
     public int getCourse7() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course7;
     }
+
     public int getCourse8() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course8;
     }
+
     public int getCourse9() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course9;
     }
+
     public int getCourse10() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course10;
     }
+
     public int getCourse11() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course11;
     }
+
     public int getCourse12() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course12;
     }
+
     public int getCourse13() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course13;
     }
+
     public int getCourse14() {
-        // TODO Auto-generated method stub
-        return (Integer) null;
+        return this.course14;
     }
 
-    public void setPid(int parseInt) {
-        // TODO Auto-generated method stub
-        
+    public void setPid(int pid) {
+        this.pid = pid;
+
     }
 
-    public void setLearner(String string) {
-        // TODO Auto-generated method stub
-        
+    public void setLearner(Learner lerner) {
+        this.learner = lerner;
+
     }
 
-    public void setDate(String string) {
-        // TODO Auto-generated method stub
-        
+    public void setLearnerId(int lernerPid) {
+        this.lernerPid = lernerPid;
+
     }
 
-    public void setCourse1(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-    public void setCourse2(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-    public void setCourse3(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-    public void setCourse4(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-    public void setCourse5(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-    public void setCourse6(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-    public void setCourse7(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-    public void setCourse8(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-    public void setCourse9(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-    public void setCourse10(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-    public void setCourse11(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-    public void setCourse12(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-    public void setCourse13(String string) {
-        // TODO Auto-generated method stub
-        
-    }
-    public void setCourse14(String string) {
-        // TODO Auto-generated method stub
-        
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public char[] getPid() {
-        // TODO Auto-generated method stub
-        return null;
+    public void setCourse1(int course1) {
+        this.course1 = course1;
     }
 
+    public void setCourse2(int course2) {
+        this.course2 = course2;
+    }
+
+    public void setCourse3(int course3) {
+        this.course3 = course3;
+    }
+
+    public void setCourse4(int course4) {
+        this.course4 = course4;
+    }
+
+    public void setCourse5(int course5) {
+        this.course5 = course5;
+    }
+
+    public void setCourse6(int course6) {
+        this.course6 = course6;
+    }
+
+    public void setCourse7(int course7) {
+        this.course7 = course7;
+    }
+
+    public void setCourse8(int course8) {
+        this.course8 = course8;
+    }
+
+    public void setCourse9(int course9) {
+        this.course9 = course9;
+    }
+
+    public void setCourse10(int course10) {
+        this.course10 = course10;
+    }
+
+    public void setCourse11(int course11) {
+        this.course11 = course11;
+    }
+
+    public void setCourse12(int course12) {
+        this.course12 = course12;
+    }
+
+    public void setCourse13(int course13) {
+        this.course13 = course13;
+    }
+
+    public void setCourse14(int course14) {
+        this.course14 = course14;
+    }
 
 }
