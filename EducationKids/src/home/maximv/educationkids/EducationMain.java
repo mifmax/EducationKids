@@ -1,7 +1,6 @@
 package home.maximv.educationkids;
 
 import home.maximv.db.service.DbLearnerService;
-import home.maximv.db.service.DbService;
 import home.maximv.db.vo.Learner;
 import home.maximv.utils.SpeechRecognition;
 
@@ -14,7 +13,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.util.Log;
@@ -25,31 +23,40 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class EducationMain extends Activity {
-    
+
     private SharedPreferences sPref;
+
     private EditText login;
-    DbService sqh;
-    SQLiteDatabase sqdb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.education_main);
         PackageManager pm = getPackageManager();
         ImageButton speakButton = (ImageButton) findViewById(R.id.speakButton);
-        List<ResolveInfo> activities = pm.queryIntentActivities(
-        new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+        List<ResolveInfo> activities = pm
+                .queryIntentActivities(new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
         if (activities.size() != 0) {
             speakButton.setImageResource(R.drawable.mic_on);
         } else {
-        speakButton.setEnabled(false);
-        speakButton.setImageResource(R.drawable.mic_off);
+            speakButton.setEnabled(false);
+            speakButton.setImageResource(R.drawable.mic_off);
         }
-      //  new SpeechToText("Здравствуйте, представьтесь пожалуйста!").start();
+        // new SpeechToText("Здравствуйте, представьтесь пожалуйста!").start();
+    }
+    
+    @Override
+    public void onStart(){
+        super.onStart();
+        DbLearnerService lernerService = new DbLearnerService(this);
+        Learner learner = lernerService.getLearner(true, this);
+        learner.setActive(false);
+        lernerService.updateLearner(learner, this);
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.education_main, menu);
         return true;
     }
@@ -59,6 +66,12 @@ public class EducationMain extends Activity {
         Editor ed = sPref.edit();
         login = (EditText) findViewById(R.id.nameKids);
         try {
+            DbLearnerService lernerService = new DbLearnerService(this);
+            Learner learner = new Learner(); learner.setFirstName("Максим"); learner.setLogin("maximv");
+            learner.setMiddleName("Иосифович");learner.setLastName("Вераховский");learner.setEmail("mifmax@tut.by");
+            learner.setSex("м");learner.setBornYear("1984");
+            lernerService.setlearner(learner, this);
+
             ed.putString(login.getText().toString(), login.getText().toString());
             ed.commit();
         } catch (Exception e) {
@@ -68,18 +81,18 @@ public class EducationMain extends Activity {
     }
 
     public void registration(View v) {
-        DbLearnerService lernerService = new DbLearnerService(this); 
+        DbLearnerService lernerService = new DbLearnerService(this);
         login = (EditText) findViewById(R.id.nameKids);
-      /*  Learner learner = new Learner();
-        learner.setFirstName("Максим");
-        learner.setLogin("maximv");
-        lernerService.setlearner(learner, this);*/
+        
         Learner learner = lernerService.getLearner(login.getText().toString(), this);
-        if (learner.getLogin()!=null) {
-            Toast.makeText(this, learner.getFirstName()+", вы успешно вошли в систему! ", Toast.LENGTH_SHORT).show();
+        learner.setActive(true);
+        lernerService.updateLearner(learner, this);
+        if (learner.getLogin() != null) {
+            Toast.makeText(this, learner.getFirstName() + ", вы успешно вошли в систему! ", Toast.LENGTH_SHORT).show();
             successRegistration();
-        }else {
-            Toast.makeText(this, "Ваше имя не найдено в базе данных,зарегистрируйтесь пожалуйста!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Ваше имя не найдено в базе данных,зарегистрируйтесь пожалуйста!", Toast.LENGTH_SHORT)
+                    .show();
         }
     }
 
@@ -89,19 +102,15 @@ public class EducationMain extends Activity {
     }
 
     public void recognize(View v) {
-    	SpeechRecognition.run(this);
+        SpeechRecognition.run(this);
     }
 
-    /**
-     * Handle the results from the recognition activity.
-     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == SpeechRecognition.VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             String resString = "";
-            for (String s : matches)
-            {
+            for (String s : matches) {
                 resString += s;
             }
             resString.trim();

@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class DbService extends SQLiteOpenHelper  implements BaseColumns{
     protected static final String DATABASE_NAME = "educationkids.db";
-    protected static final int DATABASE_VERSION = 5;
+    protected static final int DATABASE_VERSION = 6;
 
     public DbService(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);    

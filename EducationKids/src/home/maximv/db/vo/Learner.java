@@ -2,7 +2,7 @@ package home.maximv.db.vo;
 
 public class Learner {
 
-    public Learner(int pid, String firstName, String middleName, String lastName, String phoneNumber, String login, String bornYear, String email,String sex) {
+    public Learner(int pid, String firstName, String middleName, String lastName, String phoneNumber, String login, String bornYear, String email,String sex,int active) {
         super();
         this.pid=pid;
         this.firstName=firstName;
@@ -13,6 +13,7 @@ public class Learner {
         this.sex=sex;
         this.phoneNumber=phoneNumber;
         this.email=email;
+        this.active=active==0?false:true;
     }
 
     public Learner() {
@@ -36,6 +37,8 @@ public class Learner {
     private String email;
     
     private String sex;
+
+    private boolean active;
 
     public int getPid() {
         return this.pid;
@@ -69,6 +72,10 @@ public class Learner {
 
     public String getSex() {
         return this.sex;
+    }
+
+    public boolean isActive() {
+        return this.active;
     }
 
     public void setPid(int pid) {
@@ -105,6 +112,9 @@ public class Learner {
 
     public void setEmail(String email) {
         this.email=email;
+    }
+    public void setActive(boolean active) {
+        this.active=active;
     }
 
 }

@@ -18,22 +18,28 @@ import android.view.View;
 public class Draw extends View {
 
     private Bitmap mBitmap;
+
     private Canvas mCanvas;
+
     private Path mPath;
+
     private Paint mBitmapPaint;
+
     private int widthDisplay;
+
     private int heightDisplay;
+
     protected Paint mPaint;
+
     protected int selectMenu;
 
     private float mX, mY;
-    private static final float TOUCH_TOLERANCE = 4;
-    private int ml_pics [] = {R.drawable.ml1, R.drawable.ml2, R.drawable.ml3, R.drawable.ml4, R.drawable.ml5, R.drawable.ml6,
-            R.drawable.ml7, R.drawable.ml8, R.drawable.ml9, R.drawable.ml10,R.drawable.ml11,R.drawable.ml12, 
-            R.drawable.ml13,R.drawable.ml14,R.drawable.ml15,R.drawable.ml16,R.drawable.ml17,R.drawable.ml18};
-    private static Random random = new Random(); 
 
-	private static int generateRandom(int n) {
+    private static final float TOUCH_TOLERANCE = 4;
+
+    private static Random random = new Random();
+
+    private static int generateRandom(int n) {
         return Math.abs(random.nextInt(n)) % n;
     }
 
@@ -41,8 +47,8 @@ public class Draw extends View {
         super(context);
     }
 
-	public Draw(Context context, AttributeSet attrs) {
-		super(context, attrs);
+    public Draw(Context context, AttributeSet attrs) {
+        super(context, attrs);
 
         mPaint = new Paint();
         switch (MagicLetter.selectMenu) {
@@ -50,11 +56,14 @@ public class Draw extends View {
             mBitmap = Bitmap.createBitmap(1024, 1024, Bitmap.Config.ARGB_8888);
             break;
         case 1:
-            mBitmap = BitmapFactory.decodeResource(getResources(), ml_pics[generateRandom(ml_pics.length)]);
+            int ran = generateRandom(getResources().getInteger(R.integer.count_coloring_pic));
+            int pic = getResources().getIdentifier("ml" + ran, "drawable", "home.maximv.educationkids");
+            mBitmap = BitmapFactory.decodeResource(getResources(), pic);
             DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
             widthDisplay = displaymetrics.widthPixels;
-            heightDisplay = widthDisplay/mBitmap.getWidth()>1?mBitmap.getWidth()*widthDisplay/mBitmap.getWidth():mBitmap.getWidth()*mBitmap.getWidth()/widthDisplay;
-            mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay,heightDisplay+130, false);
+            heightDisplay = widthDisplay / mBitmap.getWidth() > 1 ? mBitmap.getWidth() * widthDisplay
+                    / mBitmap.getWidth() : mBitmap.getWidth() * mBitmap.getWidth() / widthDisplay;
+            mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay, heightDisplay + 130, false);
             break;
         case 2:
             break;
@@ -66,7 +75,7 @@ public class Draw extends View {
         mCanvas = new Canvas(mBitmap);
         mPath = new Path();
         mBitmapPaint = new Paint(Paint.DITHER_FLAG);
-	}
+    }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
