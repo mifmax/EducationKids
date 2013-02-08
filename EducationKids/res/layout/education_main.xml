@@ -11,41 +11,51 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="124dp"
-        android:text="@string/present" />
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="28dp"
+        android:shadowColor="#BB000000"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="5"
+        android:text="@string/present"
+        android:textColor="@color/yellow"
+        android:textStyle="bold"
+        android:textSize="30sp" /> 
 
-     <EditText
-         android:id="@+id/nameKids"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/present"
-         android:layout_below="@+id/present"
-         android:layout_marginTop="16dp"
-         android:ems="10"
-         android:inputType="text"
-         android:text="maximv" /> 
-
-     <ImageButton
-         android:id="@+id/speakButton"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBottom="@+id/nameKids"
-         android:layout_alignParentRight="true"
-         android:contentDescription="mic"
-         android:onClick="recognize"
-         android:src="@drawable/mic_off"
-         android:text="mic" />
+ <ImageButton
+        android:id="@+id/speakButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/nameKids"
+        android:layout_alignParentRight="true"
+        android:contentDescription="mic"
+        android:onClick="recognize"
+        android:src="@drawable/mic_off"
+        android:text="mic" />
 
      <Button
          android:id="@+id/loginButton"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignLeft="@+id/nameKids"
+         android:layout_alignParentBottom="true"
          android:layout_alignRight="@+id/nameKids"
-         android:layout_below="@+id/nameKids"
-         android:layout_marginTop="28dp"
+         android:layout_marginBottom="64dp"
          android:onClick="registration"
          android:text="@string/login" />
 
+     <EditText
+         android:id="@+id/nameKids"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/present"
+         android:layout_centerVertical="true"
+         android:ems="10"
+         android:inputType="text"
+         android:text="maximv" >
+
+         <requestFocus />
+     </EditText>
+     
 </RelativeLayout>
+

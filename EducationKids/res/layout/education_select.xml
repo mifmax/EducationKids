@@ -9,23 +9,14 @@
      android:id="@+id/android:list"
      android:layout_width="fill_parent"
      android:layout_height="fill_parent"
-     android:background="@color/black"/>
+     android:divider="@drawable/divider"
+     android:dividerHeight="18dp" 
+     android:background="@drawable/background_listview"/>
 
- <TextView
-     android:id="@+id/android:textView"
-     android:layout_width="fill_parent"
-     android:layout_height="fill_parent"
-     android:textColor="@color/white"
-     android:textColorHighlight="@color/white"
-     android:textSize="16sp" 
-     android:textStyle="italic"
-     android:paddingTop="10dip" 
-     android:paddingBottom="10dip"/>
-
- <TextView
+  <TextView
      android:id="@+id/android:empty"
      android:layout_width="fill_parent"
      android:layout_height="fill_parent"
      android:text="@string/no_courses_found"/>
-    
+
 </LinearLayout>

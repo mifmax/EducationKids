@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class DbService extends SQLiteOpenHelper  implements BaseColumns{
     protected static final String DATABASE_NAME = "educationkids.db";
-    protected static final int DATABASE_VERSION = 6;
+    protected static final int DATABASE_VERSION = 1;
 
     public DbService(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);    
@@ -29,10 +29,5 @@ public class DbService extends SQLiteOpenHelper  implements BaseColumns{
         db.execSQL(DbJournalService.SQL_DELETE_ENTRIES);
         // Создаём новый экземпляр таблицы
         onCreate(db);
-  }
-
-    public static void closeCon(DbService sqh, SQLiteDatabase sqdb){
-        sqdb.close();
-        sqh.close();
     }
 }

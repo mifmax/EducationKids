@@ -93,6 +93,7 @@ public class EducationMain extends Activity {
         } else {
             Toast.makeText(this, "Ваше имя не найдено в базе данных,зарегистрируйтесь пожалуйста!", Toast.LENGTH_SHORT)
                     .show();
+            saveLogin(v);
         }
     }
 
