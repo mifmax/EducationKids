@@ -18,6 +18,9 @@ public class DbService extends SQLiteOpenHelper  implements BaseColumns{
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(DbLearnerService.SQL_CREATE_ENTRIES);
         db.execSQL(DbJournalService.SQL_CREATE_ENTRIES);
+        db.execSQL(DbQuestionService.SQL_CREATE_ENTRIES);
+        db.execSQL(DbAnswerService.SQL_CREATE_ENTRIES);
+
     }
 
     @Override
@@ -27,6 +30,9 @@ public class DbService extends SQLiteOpenHelper  implements BaseColumns{
         // Удаляем предыдущую таблицу при апгрейде
         db.execSQL(DbLearnerService.SQL_DELETE_ENTRIES);
         db.execSQL(DbJournalService.SQL_DELETE_ENTRIES);
+        db.execSQL(DbQuestionService.SQL_DELETE_ENTRIES);
+        db.execSQL(DbAnswerService.SQL_DELETE_ENTRIES);
+
         // Создаём новый экземпляр таблицы
         onCreate(db);
     }

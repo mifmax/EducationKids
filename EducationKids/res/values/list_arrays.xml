@@ -13,4 +13,15 @@
         <item>"Прописи"</item>
     </string-array>
     
+        <string-array name="questions">
+        <item>"Что"</item>
+        <item>"Как"</item>
+        <item>"Какой"</item>
+        <item>"Какая"</item>
+        <item>"Где"</item>
+        <item>"Почему"</item>
+        <item>"Зачем"</item>
+        <item>"Когда"</item>
+    </string-array>
+    
 </resources>

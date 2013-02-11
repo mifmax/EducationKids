@@ -3,9 +3,22 @@ package home.maximv.educationkids;
 import home.maximv.db.service.DbLearnerService;
 import home.maximv.db.vo.Learner;
 import home.maximv.utils.SpeechRecognition;
+import home.maximv.utils.WikiRequest;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +35,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-public class EducationMain extends Activity {
+public class EducationMain extends Activity  {
 
     private SharedPreferences sPref;
 
@@ -44,9 +57,9 @@ public class EducationMain extends Activity {
         }
         // new SpeechToText("Здравствуйте, представьтесь пожалуйста!").start();
     }
-    
+
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         DbLearnerService lernerService = new DbLearnerService(this);
         Learner learner = lernerService.getLearner(true, this);
@@ -67,9 +80,14 @@ public class EducationMain extends Activity {
         login = (EditText) findViewById(R.id.nameKids);
         try {
             DbLearnerService lernerService = new DbLearnerService(this);
-            Learner learner = new Learner(); learner.setFirstName("Максим"); learner.setLogin("maximv");
-            learner.setMiddleName("Иосифович");learner.setLastName("Вераховский");learner.setEmail("mifmax@tut.by");
-            learner.setSex("м");learner.setBornYear("1984");
+            Learner learner = new Learner();
+            learner.setFirstName("Максим");
+            learner.setLogin("maximv");
+            learner.setMiddleName("Иосифович");
+            learner.setLastName("Вераховский");
+            learner.setEmail("mifmax@tut.by");
+            learner.setSex("м");
+            learner.setBornYear("1984");
             lernerService.setlearner(learner, this);
 
             ed.putString(login.getText().toString(), login.getText().toString());
@@ -80,10 +98,17 @@ public class EducationMain extends Activity {
         Log.d("SUCCESS", "Регистрация прошла успешно");
     }
 
-    public void registration(View v) {
+    public void registration(View v) throws ParserConfigurationException, SAXException, IOException {
         DbLearnerService lernerService = new DbLearnerService(this);
         login = (EditText) findViewById(R.id.nameKids);
-        
+        try {
+            WikiRequest wikiRequest = new WikiRequest(); 
+           String answer =  wikiRequest.sendWikiRequest("Мастер и маргарита");
+           Toast.makeText(this,answer , Toast.LENGTH_LONG).show();
+
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         Learner learner = lernerService.getLearner(login.getText().toString(), this);
         learner.setActive(true);
         lernerService.updateLearner(learner, this);
@@ -119,5 +144,26 @@ public class EducationMain extends Activity {
             rtext.setText(resString);
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    
+    public static String convertStreamToString(InputStream inputStream) throws IOException {
+        if (inputStream != null) {
+            Writer writer = new StringWriter();
+
+            char[] buffer = new char[1024];
+            try {
+                Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"),1024);
+                int n;
+                while ((n = reader.read(buffer)) != -1) {
+                    writer.write(buffer, 0, n);
+                }
+            } finally {
+                inputStream.close();
+            }
+            return writer.toString();
+        } else {
+            return "";
+        }
     }
 }
