@@ -23,7 +23,7 @@ public class EducationSelect extends ListActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.education_select);
         courses = getResources().getStringArray(R.array.courses);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, courses);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, courses);
         setListAdapter(adapter);
         getListView().setOnItemClickListener(itemListener);
     }
@@ -36,7 +36,6 @@ public class EducationSelect extends ListActivity{
     };
 
     public void selectItem(View v,int position) {
-
         if (position==adapter.getPosition(courses[0])){
             Intent intent = new Intent(this, SelectMagicLetter.class);
             startActivity(intent);
