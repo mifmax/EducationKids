@@ -64,10 +64,8 @@ public class DbJournalService {
         super();
     }
 
-    // Adding new journal
     public void addjournal(Journal journal,Context context) {
         SQLiteDatabase db = new DbService(context).getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(KEY_LEARNER, journal.getLearnerId());
         values.put(DATE, journal.getDate());
@@ -86,12 +84,10 @@ public class DbJournalService {
         values.put(COURSE13, journal.getCourse13());
         values.put(COURSE14, journal.getCourse14());
 
-        // Inserting Row
         db.insert(TABLE_NAME, null, values);
-        db.close(); // Closing database connection
+        db.close(); 
     }
 
-    // Getting single contact
     public Journal getJournal(int id,Context context) {
         SQLiteDatabase db = new DbService(context).getReadableDatabase();
 
@@ -106,22 +102,18 @@ public class DbJournalService {
                 cursor.getInt(7), cursor.getInt(8), cursor.getInt(9), cursor.getInt(10),
                 cursor.getInt(11), cursor.getInt(12), cursor.getInt(13), cursor.getInt(14),
                 cursor.getInt(15), cursor.getInt(16));
-        db.close(); 
         learnerservice = new DbLearnerService(context);
         journal.setLearner(learnerservice.getLearner(journal.getLearnerId(), context));
+        cursor.close();
+        db.close(); 
         return journal;
     }
 
-    // Getting All Contacts
     public List<Journal> getAllJournals(Context context) {
         List<Journal> journalList = new ArrayList<Journal>();
-        // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_NAME;
-
         SQLiteDatabase db = new DbService(context).getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 Journal journal = new Journal();
@@ -143,19 +135,16 @@ public class DbJournalService {
                 journal.setCourse13(cursor.getInt(15));
                 journal.setCourse14(cursor.getInt(16));
 
-                // Adding contact to list
                 journalList.add(journal);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         db.close(); 
-        // return journal list
         return journalList;
     }
 
-    // Updating single journal
     public int updateContact(Journal journal,Context context) {
         SQLiteDatabase db = new DbService(context).getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(KEY_LEARNER, journal.getLearnerId());
         values.put(DATE, journal.getDate());
@@ -175,25 +164,21 @@ public class DbJournalService {
         values.put(COURSE14, journal.getCourse14());
         int result = db.update(TABLE_NAME, values, UID + " = ?", new String[] { String.valueOf(journal.getPid()) });
         db.close(); 
-        // updating row
         return result;
     }
 
-    // Deleting single contact
     public void deleteContact(Journal journal,Context context) {
         SQLiteDatabase db = new DbService(context).getWritableDatabase();
         db.delete(TABLE_NAME, UID + " = ?", new String[] { String.valueOf(journal.getPid()) });
         db.close();
     }
 
-    // Getting contacts Count
     public int getJournalsCount(Context context) {
         String countQuery = "SELECT  * FROM " + TABLE_NAME;
         SQLiteDatabase db = new DbService(context).getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();
         db.close(); 
-        // return count
         return cursor.getCount();
     }
 

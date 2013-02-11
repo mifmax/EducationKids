@@ -18,7 +18,7 @@ public class SelectMagicLetter extends ListActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.education_select);
         SelectLetters = getResources().getStringArray(R.array.SelectLetters);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, SelectLetters);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, SelectLetters);
         setListAdapter(adapter);
         getListView().setOnItemClickListener(itemListener);
     }
