@@ -106,7 +106,7 @@ public class EducationMain extends Activity  {
            String answer =  wikiRequest.sendWikiRequest("Мастер и маргарита");
            Toast.makeText(this,answer , Toast.LENGTH_LONG).show();
 
-        	getResponse("Что такое слон");
+        	getResponse("кто такой крокодил");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
