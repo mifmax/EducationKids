@@ -24,33 +24,39 @@ import org.xml.sax.SAXException;
 
 public class WikiRequest {
 
-    public String sendWikiRequest(String search) throws URISyntaxException, ParserConfigurationException,
-            SAXException, IOException {
-        HttpResponse response = null;
-        HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet();
-        request.setURI(new URI("http://ru.wikipedia.org/w/api.php?action=opensearch&search=" + URLEncoder.encode(search, "UTF-8")
-                + "&limit=1&format=xml"));
-       
-        response = client.execute(request);
-        HttpEntity entity = response.getEntity();
-        InputStream is = entity.getContent();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
+	public String sendWikiRequest(String search) throws URISyntaxException,
+			ParserConfigurationException, SAXException, IOException {
+		HttpResponse response = null;
+		HttpClient client = new DefaultHttpClient();
+		HttpGet request = new HttpGet();
+		request.setURI(new URI(
+				"http://ru.wikipedia.org/w/api.php?action=opensearch&search="
+						+ URLEncoder.encode(search, "UTF-8")
+						+ "&limit=1&format=xml"));
 
-        String line = null;
+		response = client.execute(request);
+		HttpEntity entity = response.getEntity();
+		InputStream is = entity.getContent();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		StringBuilder sb = new StringBuilder();
 
-        while ((line = reader.readLine()) != null) {
-            sb.append((line + "\n"));
-        }
-        is.close();
+		String line = null;
 
-        InputSource ins = new InputSource(new StringReader(sb.toString()));
+		while ((line = reader.readLine()) != null) {
+			sb.append((line + "\n"));
+		}
+		is.close();
 
-        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        Document doc = builder.parse(ins);
-        String answer = doc.getElementsByTagName("Description").item(0).getTextContent();
-        answer = answer.split("—")[1].trim();
-        return answer;
-    }
+		InputSource ins = new InputSource(new StringReader(sb.toString()));
+
+		DocumentBuilder builder = DocumentBuilderFactory.newInstance()
+				.newDocumentBuilder();
+		Document doc = builder.parse(ins);
+		String answer = "";
+		if (doc.getElementsByTagName("Description").getLength() != 0) {
+			answer = doc.getElementsByTagName("Description").item(0).getTextContent();
+			answer = answer.split("—")[1].trim();
+		}
+		return answer;
+	}
 }

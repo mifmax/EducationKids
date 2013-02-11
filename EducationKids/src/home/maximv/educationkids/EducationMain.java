@@ -106,6 +106,7 @@ public class EducationMain extends Activity  {
            String answer =  wikiRequest.sendWikiRequest("Мастер и маргарита");
            Toast.makeText(this,answer , Toast.LENGTH_LONG).show();
 
+        	getResponse("Что такое слон");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -146,24 +147,47 @@ public class EducationMain extends Activity  {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    
-    public static String convertStreamToString(InputStream inputStream) throws IOException {
-        if (inputStream != null) {
-            Writer writer = new StringWriter();
-
-            char[] buffer = new char[1024];
-            try {
-                Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"),1024);
-                int n;
-                while ((n = reader.read(buffer)) != -1) {
-                    writer.write(buffer, 0, n);
+    public String getResponse(String quest){
+        boolean isQuestion=false;
+        String newString="";
+        String answer="";
+        String[] q = quest.split(" ");
+        String[] a = getResources().getStringArray(R.array.questions);
+        for (int i = 0; i < q.length; i++) {
+            for (String questions : a) {
+                if (questions.equalsIgnoreCase(q[i])){
+                    isQuestion=true;
+                    q[i]="";
                 }
-            } finally {
-                inputStream.close();
             }
-            return writer.toString();
-        } else {
-            return "";
         }
-    }
+        if (isQuestion){
+            for (String questions : q) {
+                newString=newString+questions+" ";   
+            }
+        }
+        //if () есть в базе данных
+        //else идем на wiki
+        newString.trim();
+        try {
+            WikiRequest wikiRequest = new WikiRequest(); 
+           answer =  wikiRequest.sendWikiRequest(newString);
+           Toast.makeText(this,answer , Toast.LENGTH_LONG).show();
+
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SAXException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return answer;
+
+    }    
+
 }
