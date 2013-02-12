@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Обучение детей</string>
+    <string name="app_name">Веселое рисование</string>
     <string name="present">Добро Пожаловать!!!</string>
     <string name="next">Далее</string>
     <string name="description">Кнопка панели инструментов</string>
