@@ -60,12 +60,6 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
         switch (selectMenu) {
         case 0:
         case 1:
-            setContentView(R.layout.fayrypicture);
-            EL = (EraseLayout) findViewById(R.id.EraseLayout);
-            EL.backgr = findViewById(R.id.fairybackground);
-            EL.droit = findViewById(R.id.next);
-            break;
-        case 2:
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             setContentView(R.layout.color_panel);
             draw = (Draw) findViewById(R.id.draw);
@@ -79,6 +73,12 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             mPaint.setStrokeWidth(5);
             mEmboss = new EmbossMaskFilter(new float[] { 1, 1, 1 }, 0.4f, 6, 3.5f);
             mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL);
+            break;
+        case 2:
+            setContentView(R.layout.fayrypicture);
+            EL = (EraseLayout) findViewById(R.id.EraseLayout);
+            EL.backgr = findViewById(R.id.fairybackground);
+            EL.droit = findViewById(R.id.next);
             break;
         case 3:
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -197,10 +197,14 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.magicletter_menu, menu);
+        menu.findItem(R.id.NEXT_PROP).setVisible(false);
         if (selectMenu < 2) {
             menu.findItem(R.id.COLOR_MENU).setVisible(true);
         } else {
             menu.findItem(R.id.COLOR_MENU).setVisible(false);
+        }
+        if (selectMenu == 3) {
+            menu.findItem(R.id.NEXT_PROP).setVisible(true);
         }
         return true;
     }
@@ -221,7 +225,14 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
         case R.id.COLOR_MENU:
             new ColorPickerDialog(this, this, mPaint.getColor()).show();
             return true;
-
+        case R.id.NEXT_PROP:
+            Intent intent = getIntent();
+            overridePendingTransition(0, 0);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(intent);
+            break;
         case R.id.SAVE:
             takeScreenshot(true);
             break;

@@ -6,6 +6,7 @@
     <string name="next">Далее</string>
     <string name="description">Кнопка панели инструментов</string>
     <string name="COLOR_MENU_ID">Цвет</string>
+    <string name="NEXT_MENU_ID">Далее</string>
     <string name="SAVE">Сохранить</string>
     <integer name="count_erasable_pic">60</integer>
     <integer name="count_coloring_pic">18</integer>

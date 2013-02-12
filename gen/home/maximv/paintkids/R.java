@@ -155,7 +155,8 @@ public final class R {
     public static final class id {
         public static final int COLOR_MENU=0x7f0b0021;
         public static final int EraseLayout=0x7f0b001b;
-        public static final int SAVE=0x7f0b0022;
+        public static final int NEXT_PROP=0x7f0b0022;
+        public static final int SAVE=0x7f0b0023;
         public static final int android_blur=0x7f0b0015;
         public static final int android_clear_all=0x7f0b0012;
         public static final int android_erase=0x7f0b0017;
@@ -210,7 +211,8 @@ public final class R {
     }
     public static final class string {
         public static final int COLOR_MENU_ID=0x7f070004;
-        public static final int SAVE=0x7f070005;
+        public static final int NEXT_MENU_ID=0x7f070005;
+        public static final int SAVE=0x7f070006;
         public static final int app_name=0x7f070000;
         public static final int description=0x7f070003;
         public static final int next=0x7f070002;

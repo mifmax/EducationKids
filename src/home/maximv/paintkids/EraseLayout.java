@@ -13,6 +13,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -77,8 +78,14 @@ public class EraseLayout extends View {
     }
 
     protected void setBitMap() {
+        if (mBitmap != null) {
+            mBitmap.recycle();
+            mBitmap = null;
+        }
         int ran = generateRandom(getResources().getInteger(R.integer.count_erasable_pic));
         int pic = getResources().getIdentifier("sl" + ran, "drawable", "home.maximv.paintkids");
+        ran = ran == 0 ? 1 : ran;
+        Log.d("PICT", "sl" + ran);
         getResources().getDrawable(R.id.next);
         backgr.setBackgroundResource(pic);
         mBitmap = BitmapFactory.decodeResource(getResources(), pic).copy(Bitmap.Config.ARGB_8888, true);
