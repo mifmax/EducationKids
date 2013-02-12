@@ -34,8 +34,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -50,20 +48,28 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
     private MaskFilter mBlur;
 
     protected static int selectMenu;
+
     private EraseLayout EL;
+
+    private Draw draw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         selectMenu = getIntent().getIntExtra("SelectLetters", 0);
-
-        if (selectMenu != 2) {
-
+        switch (selectMenu) {
+        case 0:
+        case 1:
+            setContentView(R.layout.fayrypicture);
+            EL = (EraseLayout) findViewById(R.id.EraseLayout);
+            EL.backgr = findViewById(R.id.fairybackground);
+            EL.droit = findViewById(R.id.next);
+            break;
+        case 2:
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             setContentView(R.layout.color_panel);
-            Draw draw = (Draw) findViewById(R.id.draw);
+            draw = (Draw) findViewById(R.id.draw);
             mPaint = draw.mPaint;
-
             mPaint.setAntiAlias(true);
             mPaint.setDither(true);
             mPaint.setColor(0xFFF00000);
@@ -71,14 +77,24 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             mPaint.setStrokeJoin(Paint.Join.ROUND);
             mPaint.setStrokeCap(Paint.Cap.ROUND);
             mPaint.setStrokeWidth(5);
-
             mEmboss = new EmbossMaskFilter(new float[] { 1, 1, 1 }, 0.4f, 6, 3.5f);
             mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL);
-        } else {
-            setContentView(R.layout.fayrypicture);
-            EL = (EraseLayout) findViewById(R.id.EraseLayout);
-            EL.backgr = findViewById(R.id.fairybackground);
-            EL.droit = findViewById(R.id.next);
+            break;
+        case 3:
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            draw = new Draw(this,null);
+            setContentView(draw);
+            mPaint = draw.mPaint;
+            mPaint.setAntiAlias(true);
+            mPaint.setDither(true);
+            mPaint.setColor(0xFF000000);
+            mPaint.setStyle(Paint.Style.STROKE);
+            mPaint.setStrokeJoin(Paint.Join.ROUND);
+            mPaint.setStrokeCap(Paint.Cap.ROUND);
+            mPaint.setStrokeWidth(5);
+            break;
+        default:
+            break;
         }
     }
 
@@ -181,7 +197,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.magicletter_menu, menu);
-        if (selectMenu != 2) {
+        if (selectMenu < 2) {
             menu.findItem(R.id.COLOR_MENU).setVisible(true);
         } else {
             menu.findItem(R.id.COLOR_MENU).setVisible(false);
@@ -197,7 +213,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (selectMenu != 2) {
+        if (selectMenu < 2) {
             mPaint.setXfermode(null);
             mPaint.setAlpha(0xFF);
         }
@@ -295,7 +311,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             return null;
         }
     }
-    
+
     public void setBitMap(View v) {
         EL.setBitMap();
     }

@@ -110,7 +110,6 @@ public class EraseLayout extends View {
                 Toast.makeText(getContext(), "Поздравляю, ты молодец!!!", Toast.LENGTH_LONG).show();
                 Animation myFadeInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.anim_droit);
                 droit.startAnimation(myFadeInAnimation);
-                droit.startAnimation(myFadeInAnimation);
             }
         }
         mX = x;

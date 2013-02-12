@@ -65,9 +65,15 @@ public class Draw extends View {
                     / mBitmap.getWidth() : mBitmap.getWidth() * mBitmap.getWidth() / widthDisplay;
             mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay, heightDisplay + 130, false);
             break;
-        case 2:
-            break;
         case 3:
+            int rand = generateRandom(getResources().getInteger(R.integer.count_prop_pic));
+            rand = rand==0?1:rand;
+            int pict = getResources().getIdentifier("pr" + rand, "drawable", "home.maximv.paintkids");
+            mBitmap = BitmapFactory.decodeResource(getResources(), pict);
+            DisplayMetrics displaymetric = getResources().getDisplayMetrics();
+            widthDisplay = displaymetric.widthPixels;
+            heightDisplay = displaymetric.heightPixels;
+            mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay, heightDisplay, false);
             break;
         default:
             break;
