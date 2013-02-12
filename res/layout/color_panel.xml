@@ -12,7 +12,7 @@
 
         <ImageView
             android:id="@+id/android:pen_black"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:contentDescription="@string/description"
             android:onClick="onPenClick"
@@ -28,7 +28,7 @@
 
         <ImageView
             android:id="@+id/android:pen_yellow"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:contentDescription="@string/description"
             android:onClick="onPenClick"
@@ -44,7 +44,7 @@
 
         <ImageView
             android:id="@+id/android:pen_brown"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:contentDescription="@string/description"
             android:onClick="onPenClick"
@@ -60,7 +60,7 @@
 
         <ImageView
             android:id="@+id/android:pen_rose"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:contentDescription="@string/description"
             android:onClick="onPenClick"
