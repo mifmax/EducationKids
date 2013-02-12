@@ -31,7 +31,9 @@ public class EraseLayout extends View {
 
     public View backgr;
 
-    private static Random random = new Random(); 
+    public View droit;
+
+    private static Random random = new Random();
 
     private static int generateRandom(int n) {
         return Math.abs(random.nextInt(n)) % n;
@@ -70,15 +72,16 @@ public class EraseLayout extends View {
         return mBitmap;
     }
 
-    private void setBitMap() {
-        int ran =generateRandom(getResources().getInteger(R.integer.count_erasable_pic));
-        int pic = getResources().getIdentifier("sl"+ran, "drawable", "home.maximv.paintkids");
-        int pic_color = getResources().getIdentifier("sl"+ran+"_color", "drawable", "home.maximv.paintkids");
-
+    protected void setBitMap() {
+        int ran = generateRandom(getResources().getInteger(R.integer.count_erasable_pic));
+        int pic = getResources().getIdentifier("sl" + ran, "drawable", "home.maximv.paintkids");
+        int pic_color = getResources().getIdentifier("sl" + ran + "_color", "drawable", "home.maximv.paintkids");
+        getResources().getDrawable(R.id.next);
         mBitmap = BitmapFactory.decodeResource(getResources(), pic).copy(Bitmap.Config.ARGB_8888, true);
         backgr.setBackgroundResource(pic_color);
         mBitmap = Bitmap.createScaledBitmap(mBitmap, getMeasuredWidth(), getMeasuredHeight(), false);
         mCanvas = new Canvas(mBitmap);
+        droit.setVisibility(INVISIBLE);
     }
 
     @Override
@@ -98,8 +101,8 @@ public class EraseLayout extends View {
         }
         if (event.getAction() == MotionEvent.ACTION_UP) {
             if (transparent()) {
-                Toast.makeText(getContext(), "Поздравляю, ты молодец!!!", Toast.LENGTH_SHORT).show();
-                setBitMap();
+                Toast.makeText(getContext(), "Поздравляю, ты молодец!!!", Toast.LENGTH_LONG).show();
+                droit.setVisibility(VISIBLE);
             }
         }
         mX = x;
