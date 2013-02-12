@@ -15,6 +15,8 @@ import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 public class EraseLayout extends View {
@@ -77,14 +79,13 @@ public class EraseLayout extends View {
     protected void setBitMap() {
         int ran = generateRandom(getResources().getInteger(R.integer.count_erasable_pic));
         int pic = getResources().getIdentifier("sl" + ran, "drawable", "home.maximv.paintkids");
-        int pic_color = getResources().getIdentifier("sl" + ran + "_color", "drawable", "home.maximv.paintkids");
         getResources().getDrawable(R.id.next);
-
-        mBitmap = BitmapFactory.decodeResource(getResources(), pic_color).copy(Bitmap.Config.ARGB_8888, true);
+        backgr.setBackgroundResource(pic);
+        mBitmap = BitmapFactory.decodeResource(getResources(), pic).copy(Bitmap.Config.ARGB_8888, true);
         mBitmap = toGrayscale(mBitmap);
-        backgr.setBackgroundResource(pic_color);
         mBitmap = Bitmap.createScaledBitmap(mBitmap, getMeasuredWidth(), getMeasuredHeight(), false);
         mCanvas = new Canvas(mBitmap);
+        droit.clearAnimation();
         droit.setVisibility(INVISIBLE);
     }
 
@@ -105,8 +106,11 @@ public class EraseLayout extends View {
         }
         if (event.getAction() == MotionEvent.ACTION_UP) {
             if (transparent()) {
-                Toast.makeText(getContext(), "Поздравляю, ты молодец!!!", Toast.LENGTH_LONG).show();
                 droit.setVisibility(VISIBLE);
+                Toast.makeText(getContext(), "Поздравляю, ты молодец!!!", Toast.LENGTH_LONG).show();
+                Animation myFadeInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.anim_droit);
+                droit.startAnimation(myFadeInAnimation);
+                droit.startAnimation(myFadeInAnimation);
             }
         }
         mX = x;

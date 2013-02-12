@@ -1,6 +1,5 @@
 package home.maximv.paintkids;
 
-import home.maximv.paintkids.R;
 import home.maximv.utils.ColorPickerDialog;
 import home.maximv.utils.Places;
 
@@ -35,6 +34,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
