@@ -114,7 +114,7 @@ public class EraseLayout extends View {
         if (event.getAction() == MotionEvent.ACTION_UP) {
             if (transparent()) {
                 droit.setVisibility(VISIBLE);
-                Toast.makeText(getContext(), "РџРѕР·РґСЂР°РІР»СЏСЋ, С‚С‹ РјРѕР»РѕРґРµС†!!!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Поздравляю, у тебя получилось!!!", Toast.LENGTH_SHORT).show();
                 Animation myFadeInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.anim_droit);
                 droit.startAnimation(myFadeInAnimation);
             }
