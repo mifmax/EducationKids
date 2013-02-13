@@ -22,8 +22,6 @@ import android.graphics.MaskFilter;
 import android.graphics.Paint;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.RadialGradient;
-import android.graphics.Shader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -34,6 +32,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -53,12 +53,34 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
 
     private Draw draw;
 
+    private float shadowRadius;
+
+    private Animation myFadeInAnimation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         selectMenu = getIntent().getIntExtra("SelectLetters", 0);
+        if (this.getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         switch (selectMenu) {
         case 0:
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            setContentView(R.layout.color_panel);
+            draw = (Draw) findViewById(R.id.draw);
+            mPaint = draw.mPaint;
+            mPaint.setAntiAlias(true);
+            mPaint.setDither(true);
+            mPaint.setColor(0xFFF00000);
+            mPaint.setStyle(Paint.Style.STROKE);
+            mPaint.setStrokeJoin(Paint.Join.ROUND);
+            mPaint.setStrokeCap(Paint.Cap.ROUND);
+            mPaint.setStrokeWidth(5);
+            mEmboss = new EmbossMaskFilter(new float[] { 1, 1, 1 }, 0.4f, 6, 3.5f);
+            mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL);
+            findViewById(R.id.android_reveal).setVisibility(View.INVISIBLE);
+            break;
         case 1:
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             setContentView(R.layout.color_panel);
@@ -73,6 +95,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             mPaint.setStrokeWidth(5);
             mEmboss = new EmbossMaskFilter(new float[] { 1, 1, 1 }, 0.4f, 6, 3.5f);
             mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL);
+            findViewById(R.id.android_reveal).setVisibility(View.VISIBLE);
             break;
         case 2:
             setContentView(R.layout.fayrypicture);
@@ -82,7 +105,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             break;
         case 3:
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-            draw = new Draw(this,null);
+            draw = new Draw(this, null);
             setContentView(draw);
             mPaint = draw.mPaint;
             mPaint.setAntiAlias(true);
@@ -96,82 +119,147 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
         default:
             break;
         }
+        myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_droit);
     }
 
     public void onPenClick(View v) {
-        // mPaint.setXfermode(null);
+        mPaint.setXfermode(null);
+        findViewById(R.id.android_reveal).clearAnimation();
+        findViewById(R.id.android_erase).clearAnimation();
         mPaint.setAlpha(0xFF);
 
         switch (v.getId()) {
         case R.id.android_pen_black:
             mPaint.setColor(Color.BLACK);
+            ColorAnimStop();
+            v.startAnimation(myFadeInAnimation);
             break;
 
         case R.id.android_pen_red:
             mPaint.setColor(Color.RED);
+            ColorAnimStop();
+            v.startAnimation(myFadeInAnimation);
             break;
 
         case R.id.android_pen_yellow:
             mPaint.setColor(Color.YELLOW);
+            ColorAnimStop();
+            v.startAnimation(myFadeInAnimation);
             break;
 
         case R.id.android_pen_blue:
             mPaint.setColor(Color.BLUE);
+            ColorAnimStop();
+            v.startAnimation(myFadeInAnimation);
             break;
 
         case R.id.android_pen_brown:
             mPaint.setColor(Color.rgb(165, 42, 42));
+            ColorAnimStop();
+            v.startAnimation(myFadeInAnimation);
             break;
 
         case R.id.android_pen_green:
             mPaint.setColor(Color.GREEN);
+            ColorAnimStop();
+            v.startAnimation(myFadeInAnimation);
             break;
 
         case R.id.android_pen_rose:
             mPaint.setColor(Color.rgb(255, 105, 180));
+            ColorAnimStop();
+            v.startAnimation(myFadeInAnimation);
             break;
 
         case R.id.android_pen_violet:
-            mPaint.setColor(Color.MAGENTA);
+            ColorAnimStop();
+            mPaint.setColor(Color.rgb(138, 43, 226));
+            v.startAnimation(myFadeInAnimation);
             break;
 
         case R.id.android_pen_emboss:
-            mPaint.setShader(null);
             if (mPaint.getMaskFilter() != mEmboss) {
                 mPaint.setMaskFilter(mEmboss);
+                v.startAnimation(myFadeInAnimation);
+                findViewById(R.id.android_blur).clearAnimation();
             } else {
                 mPaint.setMaskFilter(null);
+                v.clearAnimation();
+                findViewById(R.id.android_blur).clearAnimation();
             }
+            shadowRadius = 0;
+            mPaint.setShadowLayer(shadowRadius, 10, 5, Color.LTGRAY);
+            findViewById(R.id.android_shadow).clearAnimation();
+            findViewById(R.id.android_simple).clearAnimation();
             break;
 
         case R.id.android_reveal:
-            mPaint.setShader(null);
             mPaint.setXfermode(new PorterDuffXfermode(Mode.LIGHTEN));
+            v.startAnimation(myFadeInAnimation);
+            mPaint.setMaskFilter(null);
+            findViewById(R.id.android_simple).clearAnimation();
+            findViewById(R.id.android_pen_emboss).clearAnimation();
+            findViewById(R.id.android_shadow).clearAnimation();
+            findViewById(R.id.android_blur).clearAnimation();
             break;
 
         case R.id.android_erase:
             mPaint.setMaskFilter(null);
-            mPaint.setShader(null);
             mPaint.setColor(Color.WHITE);
+            shadowRadius = 0;
+            mPaint.setShadowLayer(shadowRadius, 10, 5, Color.LTGRAY);
+            v.startAnimation(myFadeInAnimation);
+            findViewById(R.id.android_simple).clearAnimation();
+            findViewById(R.id.android_pen_emboss).clearAnimation();
+            findViewById(R.id.android_shadow).clearAnimation();
+            findViewById(R.id.android_blur).clearAnimation();
+            findViewById(R.id.android_reveal).clearAnimation();
+            ColorAnimStop();
             break;
 
         case R.id.android_blur:
-            mPaint.setShader(null);
             if (mPaint.getMaskFilter() != mBlur) {
                 mPaint.setMaskFilter(mBlur);
+                v.startAnimation(myFadeInAnimation);
+                findViewById(R.id.android_pen_emboss).clearAnimation();
             } else {
                 mPaint.setMaskFilter(null);
+                v.clearAnimation();
+                findViewById(R.id.android_pen_emboss).clearAnimation();
             }
+            shadowRadius = 0;
+            mPaint.setShadowLayer(shadowRadius, 10, 5, Color.LTGRAY);
+            findViewById(R.id.android_simple).clearAnimation();
+            findViewById(R.id.android_shadow).clearAnimation();
             break;
 
-        case R.id.android_sheid:
-            mPaint.setShader(new RadialGradient(8f, 80f, 90f, mPaint.getColor(), Color.WHITE, Shader.TileMode.MIRROR));
+        case R.id.android_shadow:
+            findViewById(R.id.android_pen_emboss).clearAnimation();
+            findViewById(R.id.android_blur).clearAnimation();
+            mPaint.setMaskFilter(null);
+            if (shadowRadius != 0) {
+                shadowRadius = 0;
+                v.clearAnimation();
+            } else {
+                shadowRadius = 5;
+                v.startAnimation(myFadeInAnimation);
+            }
+            mPaint.setShadowLayer(shadowRadius, 10, 5, Color.LTGRAY);
+            findViewById(R.id.android_simple).clearAnimation();
             break;
 
         case R.id.android_simple:
-            mPaint.setShader(null);
+            shadowRadius = 0;
+            mPaint.setShadowLayer(shadowRadius, 10, 5, Color.LTGRAY);
             mPaint.setMaskFilter(null);
-            mPaint.setColor(Color.BLACK);
+            mPaint.setColor(Color.RED);
+            ColorAnimStop();
+            findViewById(R.id.android_pen_red).startAnimation(myFadeInAnimation);
+            v.startAnimation(myFadeInAnimation);
+            findViewById(R.id.android_pen_emboss).clearAnimation();
+            findViewById(R.id.android_blur).clearAnimation();
+            findViewById(R.id.android_shadow).clearAnimation();
+            findViewById(R.id.android_reveal).clearAnimation();
             break;
 
         case R.id.android_clear_all:
@@ -191,6 +279,17 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
 
     public void colorChanged(int color) {
         mPaint.setColor(color);
+    }
+
+    public void ColorAnimStop() {
+        findViewById(R.id.android_pen_black).clearAnimation();
+        findViewById(R.id.android_pen_blue).clearAnimation();
+        findViewById(R.id.android_pen_brown).clearAnimation();
+        findViewById(R.id.android_pen_green).clearAnimation();
+        findViewById(R.id.android_pen_red).clearAnimation();
+        findViewById(R.id.android_pen_rose).clearAnimation();
+        findViewById(R.id.android_pen_violet).clearAnimation();
+        findViewById(R.id.android_pen_yellow).clearAnimation();
     }
 
     @Override
@@ -337,4 +436,5 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
         }
         return connected;
     }
+
 }

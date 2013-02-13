@@ -59,8 +59,8 @@ public class Draw extends View {
         case 1:
             int ran = generateRandom(getResources().getInteger(R.integer.count_coloring_pic));
             int pic = getResources().getIdentifier("ml" + ran, "drawable", "home.maximv.paintkids");
-            ran = ran==0?1:ran;
-            Log.d("PICT", "ml"+ran);
+            ran = ran == 0 ? 1 : ran;
+            Log.d("PICT", "ml" + ran);
             mBitmap = BitmapFactory.decodeResource(getResources(), pic);
             DisplayMetrics displaymetrics = getResources().getDisplayMetrics();
             widthDisplay = displaymetrics.widthPixels;
@@ -70,9 +70,9 @@ public class Draw extends View {
             break;
         case 3:
             int rand = generateRandom(getResources().getInteger(R.integer.count_prop_pic));
-            rand = rand==0?1:rand;
+            rand = rand == 0 ? 1 : rand;
             int pict = getResources().getIdentifier("pr" + rand, "drawable", "home.maximv.paintkids");
-            Log.d("PICT", "pr"+rand);
+            Log.d("PICT", "pr" + rand);
             mBitmap = BitmapFactory.decodeResource(getResources(), pict);
             DisplayMetrics displaymetric = getResources().getDisplayMetrics();
             widthDisplay = displaymetric.widthPixels;

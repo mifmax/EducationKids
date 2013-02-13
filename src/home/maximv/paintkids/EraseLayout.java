@@ -86,7 +86,6 @@ public class EraseLayout extends View {
         int pic = getResources().getIdentifier("sl" + ran, "drawable", "home.maximv.paintkids");
         ran = ran == 0 ? 1 : ran;
         Log.d("PICT", "sl" + ran);
-        getResources().getDrawable(R.id.next);
         backgr.setBackgroundResource(pic);
         mBitmap = BitmapFactory.decodeResource(getResources(), pic).copy(Bitmap.Config.ARGB_8888, true);
         mBitmap = toGrayscale(mBitmap);
@@ -114,7 +113,7 @@ public class EraseLayout extends View {
         if (event.getAction() == MotionEvent.ACTION_UP) {
             if (transparent()) {
                 droit.setVisibility(VISIBLE);
-                Toast.makeText(getContext(), "Поздравляю, у тебя получилось!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getResources().getText(R.string.good), Toast.LENGTH_SHORT).show();
                 Animation myFadeInAnimation = AnimationUtils.loadAnimation(getContext(), R.anim.anim_droit);
                 droit.startAnimation(myFadeInAnimation);
             }

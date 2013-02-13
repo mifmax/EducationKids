@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_splash"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/splash"
@@ -22,16 +23,26 @@
         android:textSize="28sp"
         android:textStyle="bold" />
 
-     <Button
-         android:id="@+id/loginButton"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/present"
-         android:layout_alignParentBottom="true"
-         android:layout_alignRight="@+id/present"
-         android:layout_marginBottom="78dp"
-         android:onClick="registration"
-         android:text="@string/next" />
+    <ImageView
+        android:id="@+id/exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/back"
+        android:visibility="invisible"
+        android:onClick="exit"
+        android:layout_marginRight="34dp"
+        android:src="@drawable/exit" />
 
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/present"
+        android:layout_alignParentBottom="true"
+        android:onClick="registration"
+        android:visibility="invisible"
+        android:src="@drawable/back" />
+    
 </RelativeLayout>
 

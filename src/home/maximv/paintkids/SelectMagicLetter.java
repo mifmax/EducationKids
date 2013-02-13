@@ -1,6 +1,5 @@
 package home.maximv.paintkids;
 
-import home.maximv.paintkids.R;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +8,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 
-public class SelectMagicLetter extends ListActivity{
+public class SelectMagicLetter extends ListActivity {
     private ArrayAdapter<String> adapter;
+
     private String[] SelectLetters;
 
     @Override
@@ -24,31 +24,31 @@ public class SelectMagicLetter extends ListActivity{
     }
 
     OnItemClickListener itemListener = new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                selectItem(v,position);
-            }
+        @Override
+        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+            selectItem(v, position);
+        }
     };
 
-    public void selectItem(View v,int position) {
-        if (position==adapter.getPosition(SelectLetters[0])){
+    public void selectItem(View v, int position) {
+        if (position == adapter.getPosition(SelectLetters[0])) {
             Intent intent = new Intent(this, MagicLetter.class);
             intent.putExtra("SelectLetters", 0);
             startActivity(intent);
         }
 
-        if (position==adapter.getPosition(SelectLetters[1])){
+        if (position == adapter.getPosition(SelectLetters[1])) {
             Intent intent = new Intent(this, MagicLetter.class);
             intent.putExtra("SelectLetters", 1);
             startActivity(intent);
         }
 
-        if (position==adapter.getPosition(SelectLetters[2])){
+        if (position == adapter.getPosition(SelectLetters[2])) {
             Intent intent = new Intent(this, MagicLetter.class);
             intent.putExtra("SelectLetters", 2);
             startActivity(intent);
         }
-        if (position==adapter.getPosition(SelectLetters[3])){
+        if (position == adapter.getPosition(SelectLetters[3])) {
             Intent intent = new Intent(this, MagicLetter.class);
             intent.putExtra("SelectLetters", 3);
             startActivity(intent);

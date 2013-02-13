@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2008 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package home.maximv.paintkids;
 
 import android.content.Context;
@@ -26,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-
 public class PictureLayout extends ViewGroup {
     private final Picture mPicture = new Picture();
 
@@ -36,7 +19,7 @@ public class PictureLayout extends ViewGroup {
 
     public PictureLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-    }    
+    }
 
     @Override
     public void addView(View child) {
@@ -102,12 +85,10 @@ public class PictureLayout extends ViewGroup {
             maxWidth = Math.max(maxWidth, drawable.getMinimumWidth());
         }
 
-        setMeasuredDimension(resolveSize(maxWidth, widthMeasureSpec),
-                resolveSize(maxHeight, heightMeasureSpec));
+        setMeasuredDimension(resolveSize(maxWidth, widthMeasureSpec), resolveSize(maxHeight, heightMeasureSpec));
     }
-    
-    private void drawPict(Canvas canvas, int x, int y, int w, int h,
-                          float sx, float sy) {
+
+    private void drawPict(Canvas canvas, int x, int y, int w, int h, float sx, float sy) {
         canvas.save();
         canvas.translate(x, y);
         canvas.clipRect(0, 0, w, h);
@@ -118,20 +99,20 @@ public class PictureLayout extends ViewGroup {
     }
 
     @SuppressWarnings("unused")
-	@Override
+    @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(mPicture.beginRecording(getWidth(), getHeight()));
         mPicture.endRecording();
-        
-        int x = getWidth()/2;
-        int y = getHeight()/2;
-        
+
+        int x = getWidth() / 2;
+        int y = getHeight() / 2;
+
         if (false) {
             canvas.drawPicture(mPicture);
         } else {
-            drawPict(canvas, 0, 0, x, y,  1,  1);
-            drawPict(canvas, x, 0, x, y, -1,  1);
-            drawPict(canvas, 0, y, x, y,  1, -1);
+            drawPict(canvas, 0, 0, x, y, 1, 1);
+            drawPict(canvas, x, 0, x, y, -1, 1);
+            drawPict(canvas, 0, y, x, y, 1, -1);
             drawPict(canvas, x, y, x, y, -1, -1);
         }
     }
@@ -153,8 +134,7 @@ public class PictureLayout extends ViewGroup {
             if (child.getVisibility() != GONE) {
                 final int childLeft = getPaddingLeft();
                 final int childTop = getPaddingTop();
-                child.layout(childLeft, childTop,
-                        childLeft + child.getMeasuredWidth(),
+                child.layout(childLeft, childTop, childLeft + child.getMeasuredWidth(),
                         childTop + child.getMeasuredHeight());
 
             }
