@@ -1,6 +1,5 @@
 package home.maximv.paintkids;
 
-import home.maximv.paintkids.R;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;

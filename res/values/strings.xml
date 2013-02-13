@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">Веселое рисование</string>
-    <string name="present">Добро Пожаловать!!!</string>
+    <string name="present">Добро Пожаловать в увлекательный мир рисования!!!</string>
+    <string name="good">Молодец, у тебя получилось!!!</string>
     <string name="next">Далее</string>
     <string name="description">Кнопка панели инструментов</string>
     <string name="COLOR_MENU_ID">Цвет</string>
