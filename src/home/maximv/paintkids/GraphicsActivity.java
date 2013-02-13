@@ -26,21 +26,19 @@ class GraphicsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        this.setRequestedOrientation(
-    			ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     @SuppressWarnings("unused")
-	@Override
+    @Override
     public void setContentView(View view) {
         if (false) { // set to true to test Picture
             ViewGroup vg = new PictureLayout(this);
             vg.addView(view);
             view = vg;
         }
-        
+
         super.setContentView(view);
     }
 }
-

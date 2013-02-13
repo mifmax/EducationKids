@@ -42,6 +42,7 @@ public class EducationMain extends Activity {
         findViewById(R.id.back).startAnimation(myFadeInAnimation);
         findViewById(R.id.exit).setVisibility(View.VISIBLE);
     }
+
     public void exit(View v) {
         finish();
     }
