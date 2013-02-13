@@ -18,9 +18,9 @@ import android.view.View;
 
 public class Draw extends View {
 
-    private Bitmap mBitmap;
+	private Bitmap mBitmap;
 
-    private Canvas mCanvas;
+	protected Canvas mCanvas;
 
     private Path mPath;
 

@@ -16,6 +16,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.EmbossMaskFilter;
 import android.graphics.MaskFilter;
@@ -42,6 +43,8 @@ import android.widget.Toast;
 public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.OnColorChangedListener {
 
     private Paint mPaint;
+
+    private Canvas mCanvas;
 
     private MaskFilter mEmboss;
 
@@ -70,6 +73,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             setContentView(R.layout.color_panel);
             draw = (Draw) findViewById(R.id.draw);
             mPaint = draw.mPaint;
+            mCanvas=draw.mCanvas;
             mPaint.setAntiAlias(true);
             mPaint.setDither(true);
             mPaint.setColor(0xFFF00000);
@@ -126,6 +130,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
         mPaint.setXfermode(null);
         findViewById(R.id.android_reveal).clearAnimation();
         findViewById(R.id.android_erase).clearAnimation();
+        findViewById(R.id.android_zalivka).clearAnimation();
         mPaint.setAlpha(0xFF);
 
         switch (v.getId()) {
@@ -173,7 +178,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
 
         case R.id.android_pen_violet:
             ColorAnimStop();
-            mPaint.setColor(Color.rgb(138, 43, 226));
+            mPaint.setColor(Color.MAGENTA);
             v.startAnimation(myFadeInAnimation);
             break;
 
@@ -274,6 +279,12 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
         case R.id.android_size:
             size();
             break;
+
+        case R.id.android_zalivka:
+        	mCanvas.drawColor(mPaint.getColor());
+        	v.startAnimation(myFadeInAnimation);
+        	break;
+
         }
     }
 
