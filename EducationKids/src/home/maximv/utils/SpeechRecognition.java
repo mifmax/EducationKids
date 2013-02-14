@@ -80,8 +80,8 @@ public class SpeechRecognition {
 	
 	/**
 	 * Запрашивает разрешения на становку Голосового Поиска Google, отображая диалог. Если разрешение
-	 * получино - направляет пользователя в маркет.	
-	 * @param ownerActivity активити иниировавшая установку
+	 * получено - направляет пользователя в маркет.	
+	 * @param ownerActivity активити инициировавшая установку
 	 */
 	private static void installGoogleVoiceSearch(final Activity ownerActivity) {
 		
