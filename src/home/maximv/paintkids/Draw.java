@@ -18,9 +18,9 @@ import android.view.View;
 
 public class Draw extends View {
 
-	private Bitmap mBitmap;
+    private Bitmap mBitmap;
 
-	protected Canvas mCanvas;
+    protected Canvas mCanvas;
 
     private Path mPath;
 
@@ -33,6 +33,8 @@ public class Draw extends View {
     protected Paint mPaint;
 
     protected int selectMenu;
+
+    private int count = 0;
 
     private float mX, mY;
 
@@ -69,10 +71,12 @@ public class Draw extends View {
             mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay, heightDisplay + 130, false);
             break;
         case 3:
-            int rand = generateRandom(getResources().getInteger(R.integer.count_prop_pic));
-            rand = rand == 0 ? 1 : rand;
-            int pict = getResources().getIdentifier("pr" + rand, "drawable", "home.maximv.paintkids");
-            Log.d("PICT", "pr" + rand);
+            // int rand = generateRandom(getResources().getInteger(R.integer.count_prop_pic));
+            // rand = rand == 0 ? 1 : rand;
+            if (count++ > 32)
+                count = 1;
+            int pict = getResources().getIdentifier("pr" + count, "drawable", "home.maximv.paintkids");
+            Log.d("PICT", "pr" + count);
             mBitmap = BitmapFactory.decodeResource(getResources(), pict);
             DisplayMetrics displaymetric = getResources().getDisplayMetrics();
             widthDisplay = displaymetric.widthPixels;
@@ -97,6 +101,31 @@ public class Draw extends View {
         canvas.drawColor(0xFFFFFFFF);
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
         canvas.drawPath(mPath, mPaint);
+    }
+
+    protected void setBitMap(int i) {
+        if (mBitmap != null) {
+            mBitmap.recycle();
+            mBitmap = null;
+        }
+        if (i == 1) {
+            if (++count > 32)
+                count = 1;
+        } else {
+            if (--count < 1)
+                count = 32;
+        }
+        int pict = getResources().getIdentifier("pr" + count, "drawable", "home.maximv.paintkids");
+        Log.d("PICT", "pr" + count);
+        mBitmap = BitmapFactory.decodeResource(getResources(), pict);
+        DisplayMetrics displaymetric = getResources().getDisplayMetrics();
+        widthDisplay = displaymetric.widthPixels;
+        heightDisplay = displaymetric.heightPixels;
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay, heightDisplay, false);
+        mCanvas = new Canvas(mBitmap);
+        mPath = new Path();
+        mBitmapPaint = new Paint(Paint.DITHER_FLAG);
+        invalidate();
     }
 
     private void touch_start(float x, float y) {

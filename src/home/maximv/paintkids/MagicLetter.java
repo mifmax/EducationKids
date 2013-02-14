@@ -308,6 +308,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.magicletter_menu, menu);
         menu.findItem(R.id.NEXT_PROP).setVisible(false);
+        menu.findItem(R.id.BACK_PROP).setVisible(false);
         if (selectMenu < 2) {
             menu.findItem(R.id.COLOR_MENU).setVisible(true);
         } else {
@@ -315,6 +316,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
         }
         if (selectMenu == 3) {
             menu.findItem(R.id.NEXT_PROP).setVisible(true);
+            menu.findItem(R.id.BACK_PROP).setVisible(true);
         }
         return true;
     }
@@ -336,13 +338,24 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             new ColorPickerDialog(this, this, mPaint.getColor()).show();
             return true;
         case R.id.NEXT_PROP:
-            Intent intent = getIntent();
+/*            Intent intent = getIntent();
             overridePendingTransition(0, 0);
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
             finish();
             overridePendingTransition(0, 0);
             startActivity(intent);
+*/          draw.setBitMap(1);
             break;
+        case R.id.BACK_PROP:
+/*            Intent intent = getIntent();
+            overridePendingTransition(0, 0);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(intent);
+*/          draw.setBitMap(-1);
+            break;
+
         case R.id.SAVE:
             takeScreenshot(true);
             break;

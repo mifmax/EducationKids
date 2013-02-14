@@ -5,9 +5,14 @@
         android:icon="@drawable/color"
         android:title="@string/COLOR_MENU_ID"/>
     <item
+        android:id="@+id/BACK_PROP"
+        android:icon="@drawable/droit_back"
+        android:title="@string/BACK_MENU_ID"/>
+    <item
         android:id="@+id/NEXT_PROP"
         android:icon="@drawable/droit"
         android:title="@string/NEXT_MENU_ID"/>
+    
     <item
         android:id="@+id/SAVE"
         android:icon="@drawable/save"
