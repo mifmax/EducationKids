@@ -34,7 +34,7 @@ public class Draw extends View {
 
     protected int selectMenu;
 
-    private int count = 0;
+    private int count = 1;
 
     private float mX, mY;
 
@@ -71,10 +71,6 @@ public class Draw extends View {
             mBitmap = Bitmap.createScaledBitmap(mBitmap, widthDisplay, heightDisplay + 130, false);
             break;
         case 3:
-            // int rand = generateRandom(getResources().getInteger(R.integer.count_prop_pic));
-            // rand = rand == 0 ? 1 : rand;
-            if (count++ > 32)
-                count = 1;
             int pict = getResources().getIdentifier("pr" + count, "drawable", "home.maximv.paintkids");
             Log.d("PICT", "pr" + count);
             mBitmap = BitmapFactory.decodeResource(getResources(), pict);
@@ -109,11 +105,11 @@ public class Draw extends View {
             mBitmap = null;
         }
         if (i == 1) {
-            if (++count > 32)
+            if (++count > getResources().getInteger(R.integer.count_prop_pic))
                 count = 1;
         } else {
             if (--count < 1)
-                count = 32;
+                count = getResources().getInteger(R.integer.count_prop_pic);
         }
         int pict = getResources().getIdentifier("pr" + count, "drawable", "home.maximv.paintkids");
         Log.d("PICT", "pr" + count);

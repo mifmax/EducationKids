@@ -12,5 +12,5 @@
     <string name="SAVE">Сохранить</string>
     <integer name="count_erasable_pic">60</integer>
     <integer name="count_coloring_pic">18</integer>
-   <integer name="count_prop_pic">32</integer> 
+   <integer name="count_prop_pic">33</integer> 
 </resources>
