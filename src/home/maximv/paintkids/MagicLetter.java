@@ -130,7 +130,6 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
         mPaint.setXfermode(null);
         findViewById(R.id.android_reveal).clearAnimation();
         findViewById(R.id.android_erase).clearAnimation();
-        findViewById(R.id.android_zalivka).clearAnimation();
         mPaint.setAlpha(0xFF);
 
         switch (v.getId()) {
@@ -282,7 +281,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
 
         case R.id.android_zalivka:
         	mCanvas.drawColor(mPaint.getColor());
-        	v.startAnimation(myFadeInAnimation);
+        	draw.invalidate();
         	break;
 
         }
