@@ -19,28 +19,20 @@ public class EducationMain extends Activity {
         findViewById(R.id.main_splash).startAnimation(myFadeInAnimation);
         mHandler.postDelayed(new Runnable() {
             public void run() {
-                next_Anim();
+            	animation();
             }
         }, 3000);
     }
 
-    private void next_Anim() {
-        Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_next);
-        findViewById(R.id.main_splash).startAnimation(myFadeInAnimation);
-        mHandler.postDelayed(new Runnable() {
-            public void run() {
-                registration(null);
-            }
-        }, 3500);
-    }
-
-    public void registration(View v) {
-        Intent intent = new Intent(this, SelectMagicLetter.class);
-        startActivity(intent);
+    private void animation(){
         Animation myFadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_droit);
         findViewById(R.id.back).setVisibility(View.VISIBLE);
         findViewById(R.id.back).startAnimation(myFadeInAnimation);
         findViewById(R.id.exit).setVisibility(View.VISIBLE);
+    }
+    public void registration(View v) {
+        Intent intent = new Intent(this, SelectMagicLetter.class);
+        startActivity(intent);
     }
 
     public void exit(View v) {

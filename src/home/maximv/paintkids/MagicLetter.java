@@ -84,6 +84,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             mEmboss = new EmbossMaskFilter(new float[] { 1, 1, 1 }, 0.4f, 6, 3.5f);
             mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL);
             findViewById(R.id.android_reveal).setVisibility(View.INVISIBLE);
+            findViewById(R.id.android_zalivka).setVisibility(View.VISIBLE);
             break;
         case 1:
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -100,6 +101,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             mEmboss = new EmbossMaskFilter(new float[] { 1, 1, 1 }, 0.4f, 6, 3.5f);
             mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL);
             findViewById(R.id.android_reveal).setVisibility(View.VISIBLE);
+            findViewById(R.id.android_zalivka).setVisibility(View.INVISIBLE);
             break;
         case 2:
             setContentView(R.layout.fayrypicture);
@@ -108,7 +110,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             EL.droit = findViewById(R.id.next);
             break;
         case 3:
-            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+          //  this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             draw = new Draw(this, null);
             setContentView(draw);
             mPaint = draw.mPaint;
@@ -338,22 +340,10 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             new ColorPickerDialog(this, this, mPaint.getColor()).show();
             return true;
         case R.id.NEXT_PROP:
-/*            Intent intent = getIntent();
-            overridePendingTransition(0, 0);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            finish();
-            overridePendingTransition(0, 0);
-            startActivity(intent);
-*/          draw.setBitMap(1);
+          draw.setBitMap(1);
             break;
         case R.id.BACK_PROP:
-/*            Intent intent = getIntent();
-            overridePendingTransition(0, 0);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-            finish();
-            overridePendingTransition(0, 0);
-            startActivity(intent);
-*/          draw.setBitMap(-1);
+          draw.setBitMap(-1);
             break;
 
         case R.id.SAVE:

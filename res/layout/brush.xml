@@ -14,7 +14,7 @@
         android:layout_marginTop="40dp"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:max="25" >
+        android:max="35" >
     </SeekBar>
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="Choose Your Brush Width"
+        android:text="Выберите размер кисти"
         android:textAppearance="?android:attr/textAppearanceLarge" >
     </TextView>
 
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/size_value"
         android:layout_centerHorizontal="true"
-        android:text="Select" >
+        android:text="Выбор" >
     </Button>
 
 </RelativeLayout>

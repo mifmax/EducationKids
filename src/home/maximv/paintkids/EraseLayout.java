@@ -24,7 +24,7 @@ public class EraseLayout extends View {
 
 	private float mX, mY;
 
-	private final static int PAINT_WIDTH = 24;
+	private int PAINT_WIDTH=24;
 
 	private Paint mPaint;
 
@@ -66,6 +66,7 @@ public class EraseLayout extends View {
 		mPaint.setStyle(Paint.Style.STROKE);
 		mPaint.setStrokeJoin(Paint.Join.ROUND);
 		mPaint.setStrokeCap(Paint.Cap.ROUND);
+		PAINT_WIDTH=getResources().getInteger(R.integer.size_brush_erase);
 		mPaint.setStrokeWidth(PAINT_WIDTH);
 		mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
 	}
@@ -97,6 +98,7 @@ public class EraseLayout extends View {
 		mCanvas = new Canvas(mBitmap);
 		droit.clearAnimation();
 		droit.setVisibility(INVISIBLE);
+		invalidate();
 	}
 
 	@Override
@@ -146,7 +148,7 @@ public class EraseLayout extends View {
 				}
 			}
 		}
-		if (count < 15)
+		if (count < 40)
 			return true;
 		else
 			return false;

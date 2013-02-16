@@ -11,6 +11,7 @@
     <string name="BACK_MENU_ID">Назад</string>
     <string name="SAVE">Сохранить</string>
     <integer name="count_erasable_pic">60</integer>
-    <integer name="count_coloring_pic">18</integer>
-   <integer name="count_prop_pic">33</integer> 
+    <integer name="count_coloring_pic">17</integer>
+   <integer name="count_prop_pic">33</integer>
+    <integer name="size_brush_erase">24</integer> 
 </resources>
