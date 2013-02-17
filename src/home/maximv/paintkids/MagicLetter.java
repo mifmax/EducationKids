@@ -102,6 +102,7 @@ public class MagicLetter extends GraphicsActivity implements ColorPickerDialog.O
             mBlur = new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL);
             findViewById(R.id.android_reveal).setVisibility(View.VISIBLE);
             findViewById(R.id.android_zalivka).setVisibility(View.INVISIBLE);
+            mPaint.setMaskFilter(mBlur);
             break;
         case 2:
             setContentView(R.layout.fayrypicture);
