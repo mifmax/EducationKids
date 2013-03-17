@@ -85,9 +85,9 @@ public class EraseLayout extends View {
 		}
 		int ran = generateRandom(getResources().getInteger(
 				R.integer.count_erasable_pic));
+		ran = ran == 0 ? 1 : ran;
 		int pic = getResources().getIdentifier("sl" + ran, "drawable",
 				"home.maximv.paintkids");
-		ran = ran == 0 ? 1 : ran;
 		Log.d("PICT", "sl" + ran);
 		backgr.setBackgroundResource(pic);
 		mBitmap = BitmapFactory.decodeResource(getResources(), pic).copy(
